@@ -4,8 +4,19 @@ A small, simple, animated page indicator without the need for a viewpager.
 # Usage
 To use this view just include it in your depencencies using
 
-    TO COME
+    repositories {
+			...
+			maven { url "https://jitpack.io" }
+	}
     
+in your project build.gradle file and
+
+    dependencies {
+	        compile 'com.github.markusressel:PageIndicatorView:v0.9'
+	}
+    
+in your desired module build.gradle file.
+
 After successfull gradle build you will be able to use this in your xml layout files
 
     <de.markusressel.android.library.pageindicatorview.PageIndicatorView
