@@ -5,15 +5,15 @@ A small, simple, animated page indicator without the need for a viewpager.
 To use this view just include it in your depencencies using
 
     repositories {
-			...
-			maven { url "https://jitpack.io" }
-	}
+        ...
+        maven { url "https://jitpack.io" }
+    }
     
 in your project build.gradle file and
 
     dependencies {
-	        compile 'com.github.markusressel:PageIndicatorView:v0.9'
-	}
+        compile 'com.github.markusressel:PageIndicatorView:v0.9'
+    }
     
 in your desired module build.gradle file.
 
