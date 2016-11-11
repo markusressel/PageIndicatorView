@@ -41,7 +41,7 @@ public class PreferencesHelper {
      */
     public static int getInteger(@NonNull Context context, @StringRes int key, @IntegerRes int defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(context.getString(key), defaultValue);
+        return Integer.valueOf(sharedPreferences.getString(context.getString(key), String.valueOf(defaultValue)));
     }
 
     /**

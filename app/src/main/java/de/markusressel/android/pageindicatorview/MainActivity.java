@@ -18,10 +18,14 @@ package de.markusressel.android.pageindicatorview;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager tabViewPager;
     private CustomTabAdapter customTabAdapter;
     private PageIndicatorView pageIndicatorView;
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,25 +72,88 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        @ColorInt int activeIndicatorColorFill = PreferencesHelper.getColor(this, R.string.key_activeIndicatorColorFill, getResources().getColor(R.color.default_value_activeIndicatorColorFill));
-        @ColorInt int activeIndicatorColorStroke = PreferencesHelper.getColor(this, R.string.key_activeIndicatorColorStroke, getResources().getColor(R.color.default_value_activeIndicatorColorStroke));
-        int activeIndicatorSize = PreferencesHelper.getInteger(this, R.string.key_activeIndicatorSize, R.integer.default_value_activeIndicatorSize);
+        @ColorInt int activeIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorFill, getResources().getColor(R.color.default_value_activeIndicatorColorFill));
+        @ColorInt int activeIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorStroke, getResources().getColor(R.color.default_value_activeIndicatorColorStroke));
+        int activeIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_activeIndicatorSize, R.integer.default_value_activeIndicatorSize);
 
-        @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(this, R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
-        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(this, R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
-        int inactiveIndicatorSize = PreferencesHelper.getInteger(this, R.string.key_inactiveIndicatorSize, R.integer.default_value_inactiveIndicatorSize);
+        @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
+        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
+        int inactiveIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.integer.default_value_inactiveIndicatorSize);
 
-        int indicatorGap = PreferencesHelper.getInteger(this, R.string.key_indicatorGap, R.integer.default_value_indicatorGap);
-        int initialPageIndex = PreferencesHelper.getInteger(this, R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
-        int pageCount = PreferencesHelper.getInteger(this, R.string.key_pageCount, R.integer.default_value_pageCount);
+        int indicatorGap = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_indicatorGap, R.integer.default_value_indicatorGap);
+        int initialPageIndex = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
+        int pageCount = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_pageCount, R.integer.default_value_pageCount);
 
-        pageIndicatorView.setPageCount(customTabAdapter.getCount());
+        pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorColorFill);
+        pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorColorStroke);
+        pageIndicatorView.setActiveIndicatorSize(activeIndicatorSize);
+
+        pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
+        pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
+        pageIndicatorView.setInactiveIndicatorSize(inactiveIndicatorSize);
+
+        pageIndicatorView.setIndicatorGap(indicatorGap);
+
+        pageIndicatorView.setPageCount(pageCount);
         pageIndicatorView.setCurrentPage(initialPageIndex, false);
-        // TODO: set other values from settings (create setters first)
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (SettingsPage.INTENT_ACTION_PREFRENCE_CHANGED.equals(intent.getAction())) {
+                    String key = intent.getStringExtra(SettingsPage.KEY_PREFERENCE_KEY);
+
+                    if (getString(R.string.key_activeIndicatorColorFill).equals(key)) {
+                        @ColorInt int activeIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorFill, getResources().getColor(R.color.default_value_activeIndicatorColorFill));
+                        pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorColorFill);
+                    } else if (getString(R.string.key_activeIndicatorColorStroke).equals(key)) {
+                        @ColorInt int activeIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorStroke, getResources().getColor(R.color.default_value_activeIndicatorColorStroke));
+                        pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorColorStroke);
+                    } else if (getString(R.string.key_activeIndicatorSize).equals(key)) {
+                        int activeIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_activeIndicatorSize, R.integer.default_value_activeIndicatorSize);
+                        pageIndicatorView.setActiveIndicatorSize(activeIndicatorSize);
+                    } else if (getString(R.string.key_inactiveIndicatorColorFill).equals(key)) {
+                        @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
+                        pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
+                    } else if (getString(R.string.key_inactiveIndicatorColorStroke).equals(key)) {
+                        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
+                        pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
+                    } else if (getString(R.string.key_inactiveIndicatorSize).equals(key)) {
+                        int inactiveIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.integer.default_value_inactiveIndicatorSize);
+                        pageIndicatorView.setInactiveIndicatorSize(inactiveIndicatorSize);
+                    } else if (getString(R.string.key_indicatorGap).equals(key)) {
+                        int indicatorGap = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_indicatorGap, R.integer.default_value_indicatorGap);
+                        pageIndicatorView.setIndicatorGap(indicatorGap);
+                    } else if (getString(R.string.key_initialPageIndex).equals(key)) {
+                        int initialPageIndex = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
+                        // TODO
+                    } else if (getString(R.string.key_pageCount).equals(key)) {
+                        int pageCount = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_pageCount, R.integer.default_value_pageCount);
+                        customTabAdapter.setCount(pageCount);
+                        pageIndicatorView.setPageCount(pageCount);
+                    }
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(SettingsPage.INTENT_ACTION_PREFRENCE_CHANGED);
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    public void onStop() {
+        LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(broadcastReceiver);
+        super.onStop();
     }
 
     private static class CustomTabAdapter extends FragmentPagerAdapter {
         private Context context;
+        private int count = 5;
 
         public CustomTabAdapter(FragmentManager fm, Context context) {
             super(fm);
@@ -106,7 +174,16 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public int getCount() {
-            return 5;
+            return count;
+        }
+
+        /**
+         * Set the amount of pages
+         */
+        public void setCount(int count) {
+            this.count = count;
+
+            notifyDataSetChanged();
         }
 
         @Override

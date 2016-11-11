@@ -23,6 +23,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -236,6 +237,164 @@ public class PageIndicatorView extends LinearLayout {
     }
 
     /**
+     * Get the current fill color of an active indicator
+     *
+     * @return color
+     */
+    @ColorInt
+    public int getActiveIndicatorFillColor() {
+        return activeIndicatorFillColor;
+    }
+
+    /**
+     * Set the fill color of an active indicator
+     *
+     * @param activeIndicatorFillColor color
+     */
+    public void setActiveIndicatorFillColor(@ColorInt int activeIndicatorFillColor) {
+        this.activeIndicatorFillColor = activeIndicatorFillColor;
+
+        init();
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Get the current stroke color of an active indicator
+     *
+     * @return color
+     */
+    @ColorInt
+    public int getActiveIndicatorStrokeColor() {
+        return activeIndicatorStrokeColor;
+    }
+
+    /**
+     * Set the stroke color of an active indicator
+     *
+     * @param activeIndicatorStrokeColor color
+     */
+    public void setActiveIndicatorStrokeColor(@ColorInt int activeIndicatorStrokeColor) {
+        this.activeIndicatorStrokeColor = activeIndicatorStrokeColor;
+
+        init();
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Get the current size of an active indicator
+     *
+     * @return size in pixel
+     */
+    public int getActiveIndicatorSize() {
+        return activeIndicatorSize;
+    }
+
+    /**
+     * Set the size of an active indicator
+     *
+     * @param activeIndicatorSize size in pixel
+     */
+    public void setActiveIndicatorSize(int activeIndicatorSize) {
+        this.activeIndicatorSize = activeIndicatorSize;
+
+        init();
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Get the current fill color of an inactive indicator
+     *
+     * @return color
+     */
+    @ColorInt
+    public int getInactiveIndicatorFillColor() {
+        return inactiveIndicatorFillColor;
+    }
+
+    /**
+     * Set the fill color of an inactive indicator
+     *
+     * @param inactiveIndicatorFillColor color
+     */
+    public void setInactiveIndicatorFillColor(@ColorInt int inactiveIndicatorFillColor) {
+        this.inactiveIndicatorFillColor = inactiveIndicatorFillColor;
+
+        init();
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Get the current stroke color of an inactive indicator
+     *
+     * @return color
+     */
+    @ColorInt
+    public int getInactiveIndicatorStrokeColor() {
+        return inactiveIndicatorStrokeColor;
+    }
+
+    /**
+     * Set the stroke color of an inactive indicator
+     *
+     * @param inactiveIndicatorStrokeColor color
+     */
+    public void setInactiveIndicatorStrokeColor(@ColorInt int inactiveIndicatorStrokeColor) {
+        this.inactiveIndicatorStrokeColor = inactiveIndicatorStrokeColor;
+
+        init();
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Get the current size of an inactive indicator
+     *
+     * @return size in pixel
+     */
+    public int getInactiveIndicatorSize() {
+        return inactiveIndicatorSize;
+    }
+
+    /**
+     * Set the size of an inactive indicator
+     *
+     * @param inactiveIndicatorSize size
+     */
+    public void setInactiveIndicatorSize(int inactiveIndicatorSize) {
+        this.inactiveIndicatorSize = inactiveIndicatorSize;
+
+        init();
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Get the current gap size between indicators
+     *
+     * @return gap size in pixel
+     */
+    public int getIndicatorGap() {
+        return indicatorGap;
+    }
+
+    /**
+     * Set the gap size between indicators
+     *
+     * @param indicatorGap gap size in pixel
+     */
+    public void setIndicatorGap(int indicatorGap) {
+        this.indicatorGap = indicatorGap;
+
+        init();
+        invalidate();
+        requestLayout();
+    }
+
+    /**
      * Get amount of pages
      *
      * @return amount of pages
@@ -250,6 +409,10 @@ public class PageIndicatorView extends LinearLayout {
      * @param pageCount amount of pages
      */
     public void setPageCount(int pageCount) {
+        if (pageCount <= 0) {
+            Log.w(TAG, "Page count must be greater than 0!");
+            return;
+        }
         this.pageCount = pageCount;
 
         init();

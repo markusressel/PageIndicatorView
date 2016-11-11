@@ -16,22 +16,43 @@
 
 package de.markusressel.android.pageindicatorview;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.support.v4.content.LocalBroadcastManager;
 
 import de.markusressel.android.pageindicatorview.preferences.PreferencesHelper;
 
 /**
+ * Simple preferences page
+ * <p>
  * Created by Markus on 10.11.2016.
  */
+public class SettingsPage extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-public class SettingsPage extends PreferenceFragment {
+    public static final String INTENT_ACTION_PREFRENCE_CHANGED = "preference_changed";
+    public static final String KEY_PREFERENCE_KEY = "preferenceKey";
 
     public static SettingsPage newInstance() {
         Bundle args = new Bundle();
         SettingsPage fragment = new SettingsPage();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    /**
+     * Notifies the MainActivity that settings have changed
+     *
+     * @param context application context
+     * @param key     prefrence key that has changed
+     */
+    private static void notifyPreferenceChanged(Context context, String key) {
+        Intent intent = new Intent(INTENT_ACTION_PREFRENCE_CHANGED);
+        intent.putExtra(KEY_PREFERENCE_KEY, key);
+
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     @Override
@@ -45,4 +66,22 @@ public class SettingsPage extends PreferenceFragment {
         addPreferencesFromResource(R.xml.settings);
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        notifyPreferenceChanged(getActivity(), key);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+
+        super.onPause();
+    }
 }
