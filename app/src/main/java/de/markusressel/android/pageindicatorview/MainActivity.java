@@ -16,15 +16,17 @@
 
 package de.markusressel.android.pageindicatorview;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.annotation.ColorInt;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import de.markusressel.android.library.pageindicatorview.PageIndicatorView;
+import de.markusressel.android.pageindicatorview.preferences.PreferencesHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Create the adapter that will return a fragment
         // for each of the two primary sections of the app.
-        customTabAdapter = new CustomTabAdapter(getSupportFragmentManager(), this);
+        customTabAdapter = new CustomTabAdapter(getFragmentManager(), this);
 
         // Set up the tabViewPager, attaching the adapter and setting up a listener
         // for when the user swipes between sections.
@@ -65,7 +67,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        @ColorInt int activeIndicatorColorFill = PreferencesHelper.getColor(this, R.string.key_activeIndicatorColorFill, getResources().getColor(R.color.default_value_activeIndicatorColorFill));
+        @ColorInt int activeIndicatorColorStroke = PreferencesHelper.getColor(this, R.string.key_activeIndicatorColorStroke, getResources().getColor(R.color.default_value_activeIndicatorColorStroke));
+        int activeIndicatorSize = PreferencesHelper.getInteger(this, R.string.key_activeIndicatorSize, R.integer.default_value_activeIndicatorSize);
+
+        @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(this, R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
+        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(this, R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
+        int inactiveIndicatorSize = PreferencesHelper.getInteger(this, R.string.key_inactiveIndicatorSize, R.integer.default_value_inactiveIndicatorSize);
+
+        int indicatorGap = PreferencesHelper.getInteger(this, R.string.key_indicatorGap, R.integer.default_value_indicatorGap);
+        int initialPageIndex = PreferencesHelper.getInteger(this, R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
+        int pageCount = PreferencesHelper.getInteger(this, R.string.key_pageCount, R.integer.default_value_pageCount);
+
         pageIndicatorView.setPageCount(customTabAdapter.getCount());
+        pageIndicatorView.setCurrentPage(initialPageIndex, false);
+        // TODO: set other values from settings (create setters first)
     }
 
     private static class CustomTabAdapter extends FragmentPagerAdapter {
@@ -78,7 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return SamplePage.newInstance("Page: " + (position + 1));
+            if (position == 0) {
+                return SettingsPage.newInstance();
+            } else {
+                return SamplePage.newInstance("Page: " + (position + 1));
+            }
         }
 
         /**

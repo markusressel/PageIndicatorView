@@ -15,5 +15,45 @@
   -->
 
 <resources>
-    <string name="app_name">PageIndicatorView</string>
+    <string name="app_name">PageIndicatorViewDemo</string>
+
+    <string name="settings">Settings</string>
+
+    <string name="key_activeIndicatorColorFill">activeIndicatorColorFill</string>
+    <string name="title_activeIndicatorColorFill">Active indicator fill color</string>
+    <color name="default_value_activeIndicatorColorFill">@color/activeIndicatorColorFill</color>
+
+    <string name="key_activeIndicatorColorStroke">activeIndicatorColorStroke</string>
+    <string name="title_activeIndicatorColorStroke">Active indictor stroke color</string>
+    <color name="default_value_activeIndicatorColorStroke">@color/activeIndicatorColorStroke</color>
+
+    <string name="key_activeIndicatorSize">activeIndicatorSize</string>
+    <string name="title_activeIndicatorSize">Active indicator size</string>
+    <integer name="default_value_activeIndicatorSize">10</integer>
+
+    <string name="key_inactiveIndicatorColorFill">inactiveIndicatorColorFill</string>
+    <string name="title_inactiveIndicatorColorFill">Inactive indicator fill color</string>
+    <color name="default_value_inactiveIndicatorColorFill">@color/inactiveIndicatorColorFill</color>
+
+    <string name="key_inactiveIndicatorColorStroke">inactiveIndicatorColorStroke</string>
+    <string name="title_inactiveIndicatorColorStroke">Inactive indicator stroke color</string>
+    <color name="default_value_inactiveIndicatorColorStroke">@color/inactiveIndicatorColorStroke
+    </color>
+
+    <string name="key_inactiveIndicatorSize">inactiveIndicatorSize</string>
+    <string name="title_inactiveIndicatorSize">Inactive indicator size</string>
+    <integer name="default_value_inactiveIndicatorSize">15</integer>
+
+    <string name="key_indicatorGap">indicatorGap</string>
+    <string name="title_indicatorGap">Gap between indicators</string>
+    <integer name="default_value_indicatorGap">10</integer>
+
+    <string name="key_initialPageIndex">initialPageIndex</string>
+    <string name="title_initialPageIndex">Initial page index</string>
+    <integer name="default_value_initialPageIndex">0</integer>
+
+    <string name="key_pageCount">pageCount</string>
+    <string name="title_pageCount">Page count</string>
+    <integer name="default_value_pageCount">5</integer>
+
 </resources>

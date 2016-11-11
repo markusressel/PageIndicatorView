@@ -19,4 +19,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="activeIndicatorColorFill">@color/colorAccent</color>
+    <color name="activeIndicatorColorStroke">#FFFFFFFF</color>
+
+    <color name="inactiveIndicatorColorFill">#55FFFFFF</color>
+    <color name="inactiveIndicatorColorStroke">#55FFFFFF</color>
+
+
 </resources>
