@@ -41,7 +41,24 @@ If you want you can change the style of the indicators by using attributes
             app:piv_indicatorGap="10dp"
             app:piv_initialPageIndex="0"
             app:piv_pageCount="3"/>
-            
+
+You can also set these values in code using the following methods:
+
+    pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorFillColor);
+    pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorStrokeColor);
+    pageIndicatorView.setActiveIndicatorSize(activeIndicatorSizeInPixels);
+
+    pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorFillColor);
+    pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorStrokeColor);
+    pageIndicatorView.setInactiveIndicatorSize(inactiveIndicatorSizeInPixels);
+
+    pageIndicatorView.setIndicatorGap(indicatorGapInPixels);
+
+    pageIndicatorView.setPageCount(pageCount);
+
+    pageIndicatorView.setCurrentPage(initialPageIndex, false);  // not animated
+    pageIndicatorView.setCurrentPage(initialPageIndex, true);   // animated
+
 # License
 
     Copyright (c) 2016 Markus Ressel
