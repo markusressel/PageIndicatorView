@@ -42,7 +42,13 @@ public class PreferencesHelper {
      */
     public static float getDimen(@NonNull Context context, @StringRes int key, @DimenRes int defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        return Float.valueOf(sharedPreferences.getString(context.getString(key), String.valueOf(context.getResources().getDimension(defaultValue))));
+        String dimenAsString = sharedPreferences.getString(context.getString(key), null);
+
+        if (dimenAsString == null) {
+            return context.getResources().getDimension(defaultValue);
+        } else {
+            return Float.valueOf(dimenAsString);
+        }
     }
 
     /**
@@ -55,7 +61,13 @@ public class PreferencesHelper {
      */
     public static int getInteger(@NonNull Context context, @StringRes int key, @IntegerRes int defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        return Integer.valueOf(sharedPreferences.getString(context.getString(key), String.valueOf(context.getResources().getInteger(defaultValue))));
+        String integerAsString = sharedPreferences.getString(context.getString(key), null);
+
+        if (integerAsString == null) {
+            return context.getResources().getInteger(defaultValue);
+        } else {
+            return Integer.valueOf(integerAsString);
+        }
     }
 
     /**

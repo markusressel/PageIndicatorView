@@ -29,7 +29,7 @@
             android:title="@string/title_activeIndicatorColorStroke" />
 
         <EditTextPreference
-            android:defaultValue="@dimen/default_value_activeIndicatorSize"
+            android:defaultValue="15"
             android:dialogTitle="@string/title_activeIndicatorSize"
             android:inputType="number"
             android:key="@string/key_activeIndicatorSize"
@@ -46,14 +46,14 @@
             android:title="@string/title_inactiveIndicatorColorStroke" />
 
         <EditTextPreference
-            android:defaultValue="@dimen/default_value_inactiveIndicatorSize"
+            android:defaultValue="10"
             android:dialogTitle="@string/title_inactiveIndicatorSize"
             android:inputType="number"
             android:key="@string/key_inactiveIndicatorSize"
             android:title="@string/title_inactiveIndicatorSize" />
 
         <EditTextPreference
-            android:defaultValue="@dimen/default_value_indicatorGap"
+            android:defaultValue="10"
             android:dialogTitle="@string/title_indicatorGap"
             android:inputType="number"
             android:key="@string/key_indicatorGap"
