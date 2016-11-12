@@ -135,7 +135,8 @@ public class PageIndicatorView extends LinearLayout {
         activeCircleIndicator.setFillColor(activeIndicatorFillColor);
         activeCircleIndicator.setStrokeColor(activeIndicatorStrokeColor);
 
-        addView(activeCircleIndicator, activeIndicatorSize + 1, activeIndicatorSize + 1);
+        int size = Math.max(activeIndicatorSize, inactiveIndicatorSize) + 1;
+        addView(activeCircleIndicator, size, size);
 
         LayoutParams lp = (LayoutParams) activeCircleIndicator.getLayoutParams();
         lp.leftMargin = indicatorGap / 2;
@@ -151,7 +152,8 @@ public class PageIndicatorView extends LinearLayout {
         inactiveCircleIndicator.setFillColor(inactiveIndicatorFillColor);
         inactiveCircleIndicator.setStrokeColor(inactiveIndicatorStrokeColor);
 
-        addView(inactiveCircleIndicator, inactiveIndicatorSize + 1, inactiveIndicatorSize + 1);
+        int size = Math.max(activeIndicatorSize, inactiveIndicatorSize) + 1;
+        addView(inactiveCircleIndicator, size, size);
 
         LayoutParams lp = (LayoutParams) inactiveCircleIndicator.getLayoutParams();
         lp.leftMargin = indicatorGap / 2;
