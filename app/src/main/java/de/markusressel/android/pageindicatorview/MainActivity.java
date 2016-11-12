@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         float activeIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_activeIndicatorSize, R.dimen.default_value_activeIndicatorSize);
 
         @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
-        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
+        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorStroke, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
         float inactiveIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.dimen.default_value_inactiveIndicatorSize);
 
         float indicatorGap = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_indicatorGap, R.dimen.default_value_indicatorGap);
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
                         pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
                     } else if (getString(R.string.key_inactiveIndicatorColorStroke).equals(key)) {
-                        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
+                        @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorStroke, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
                         pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
                     } else if (getString(R.string.key_inactiveIndicatorSize).equals(key)) {
                         float inactiveIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.dimen.default_value_inactiveIndicatorSize);

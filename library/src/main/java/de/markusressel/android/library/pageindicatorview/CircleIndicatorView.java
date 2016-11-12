@@ -34,11 +34,13 @@ public class CircleIndicatorView extends View {
 
     private static final int DEFAULT_DIAMETER = 10;
     private static final int DEFAULT_FILL_COLOR = Color.WHITE;
+    private static final int DEFAULT_STROKE_WIDTH = 1;
     private static final int DEFAULT_STROKE_COLOR = Color.WHITE;
 
     private float diameter;
     private int fillColor;
     private int strokeColor;
+    private int strokeWidth;
 
     private Paint indicatorFillPaint;
     private Paint indicatorStrokePaint;
@@ -77,6 +79,7 @@ public class CircleIndicatorView extends View {
             diameter = a.getDimensionPixelSize(R.styleable.CircleIndicatorView_civ_diameter, DEFAULT_DIAMETER);
             fillColor = a.getColor(R.styleable.CircleIndicatorView_civ_fillColor, DEFAULT_FILL_COLOR);
             strokeColor = a.getColor(R.styleable.CircleIndicatorView_civ_strokeColor, DEFAULT_STROKE_COLOR);
+            strokeWidth = a.getDimensionPixelSize(R.styleable.CircleIndicatorView_civ_strokeWidth, DEFAULT_STROKE_WIDTH);
         } finally {
             a.recycle();
         }
@@ -89,28 +92,29 @@ public class CircleIndicatorView extends View {
 
         indicatorStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         indicatorStrokePaint.setColor(strokeColor);
+        indicatorStrokePaint.setStrokeWidth(strokeWidth);
         indicatorStrokePaint.setStyle(Paint.Style.STROKE);
     }
 
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        //Get the width measurement
-//        int widthSize = View.resolveSize(getDesiredWidth(), widthMeasureSpec);
-//
-//        //Get the height measurement
-//        int heightSize = View.resolveSize(getDesiredHeight(), heightMeasureSpec);
-//
-//        //MUST call this to store the measurements
-//        setMeasuredDimension(widthSize, heightSize);
-//    }
-//
-//    private int getDesiredWidth() {
-//        return (int) Math.ceil((double) diameter) + 1;
-//    }
-//
-//    private int getDesiredHeight() {
-//        return (int) Math.ceil((double) diameter) + 1;
-//    }
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        //Get the width measurement
+        int widthSize = View.resolveSize(getDesiredWidth(), widthMeasureSpec);
+
+        //Get the height measurement
+        int heightSize = View.resolveSize(getDesiredHeight(), heightMeasureSpec);
+
+        //MUST call this to store the measurements
+        setMeasuredDimension(widthSize, heightSize);
+    }
+
+    private int getDesiredWidth() {
+        return (int) Math.ceil((double) diameter + strokeWidth) + 1;
+    }
+
+    private int getDesiredHeight() {
+        return (int) Math.ceil((double) diameter + strokeWidth) + 1;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -184,6 +188,28 @@ public class CircleIndicatorView extends View {
     public void setStrokeColor(int strokeColor) {
         this.strokeColor = strokeColor;
         indicatorStrokePaint.setColor(strokeColor);
+
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Get current stroke width
+     *
+     * @return stroke width in pixel
+     */
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    /**
+     * Set the stroke width in pixel
+     *
+     * @param strokeWidth stroke width in pixel
+     */
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+        indicatorStrokePaint.setStrokeWidth(strokeWidth);
 
         invalidate();
         requestLayout();
