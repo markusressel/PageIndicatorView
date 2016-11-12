@@ -29,7 +29,8 @@
 
     <string name="key_activeIndicatorSize">activeIndicatorSize</string>
     <string name="title_activeIndicatorSize">Active indicator size</string>
-    <integer name="default_value_activeIndicatorSize">10</integer>
+    <dimen name="default_value_activeIndicatorSize">10dp</dimen>
+    <string name="summary_activeIndicatorSize">%1$sdp</string>
 
     <string name="key_inactiveIndicatorColorFill">inactiveIndicatorColorFill</string>
     <string name="title_inactiveIndicatorColorFill">Inactive indicator fill color</string>
@@ -42,11 +43,13 @@
 
     <string name="key_inactiveIndicatorSize">inactiveIndicatorSize</string>
     <string name="title_inactiveIndicatorSize">Inactive indicator size</string>
-    <integer name="default_value_inactiveIndicatorSize">15</integer>
+    <dimen name="default_value_inactiveIndicatorSize">15dp</dimen>
+    <string name="summary_inactiveIndicatorSize">%1$sdp</string>
 
     <string name="key_indicatorGap">indicatorGap</string>
     <string name="title_indicatorGap">Gap between indicators</string>
-    <integer name="default_value_indicatorGap">10</integer>
+    <dimen name="default_value_indicatorGap">10dp</dimen>
+    <string name="summary_indicatorGap">%1$sdp</string>
 
     <string name="key_initialPageIndex">initialPageIndex</string>
     <string name="title_initialPageIndex">Initial page index</string>

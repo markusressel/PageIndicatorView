@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.annotation.Dimension;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -362,9 +363,10 @@ public class PageIndicatorView extends LinearLayout {
     /**
      * Set the size of an inactive indicator
      *
-     * @param inactiveIndicatorSize size
+     * @param inactiveIndicatorSize size in pixel
      */
     public void setInactiveIndicatorSize(int inactiveIndicatorSize) {
+
         this.inactiveIndicatorSize = inactiveIndicatorSize;
 
         init();

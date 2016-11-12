@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private CustomTabAdapter customTabAdapter;
     private PageIndicatorView pageIndicatorView;
     private BroadcastReceiver broadcastReceiver;
+
+    private static float pxFromDp(final Context context, final float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
         @ColorInt int activeIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorFill, getResources().getColor(R.color.default_value_activeIndicatorColorFill));
         @ColorInt int activeIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorStroke, getResources().getColor(R.color.default_value_activeIndicatorColorStroke));
-        int activeIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_activeIndicatorSize, R.integer.default_value_activeIndicatorSize);
+        float activeIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_activeIndicatorSize, R.dimen.default_value_activeIndicatorSize);
 
         @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
         @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
-        int inactiveIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.integer.default_value_inactiveIndicatorSize);
+        float inactiveIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.dimen.default_value_inactiveIndicatorSize);
 
-        int indicatorGap = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_indicatorGap, R.integer.default_value_indicatorGap);
+        float indicatorGap = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_indicatorGap, R.dimen.default_value_indicatorGap);
         int initialPageIndex = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
         int pageCount = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_pageCount, R.integer.default_value_pageCount);
 
         pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorColorFill);
         pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorColorStroke);
-        pageIndicatorView.setActiveIndicatorSize(activeIndicatorSize);
+        pageIndicatorView.setActiveIndicatorSize(Math.round(pxFromDp(this, activeIndicatorSize)));
 
         pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
         pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
-        pageIndicatorView.setInactiveIndicatorSize(inactiveIndicatorSize);
+        pageIndicatorView.setInactiveIndicatorSize(Math.round(pxFromDp(this, inactiveIndicatorSize)));
 
-        pageIndicatorView.setIndicatorGap(indicatorGap);
+        pageIndicatorView.setIndicatorGap(Math.round(pxFromDp(this, indicatorGap)));
 
         pageIndicatorView.setPageCount(pageCount);
         pageIndicatorView.setCurrentPage(initialPageIndex, false);
@@ -110,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
                         @ColorInt int activeIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorStroke, getResources().getColor(R.color.default_value_activeIndicatorColorStroke));
                         pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorColorStroke);
                     } else if (getString(R.string.key_activeIndicatorSize).equals(key)) {
-                        int activeIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_activeIndicatorSize, R.integer.default_value_activeIndicatorSize);
-                        pageIndicatorView.setActiveIndicatorSize(activeIndicatorSize);
+                        float activeIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_activeIndicatorSize, R.dimen.default_value_activeIndicatorSize);
+                        pageIndicatorView.setActiveIndicatorSize(Math.round(pxFromDp(getApplicationContext(), activeIndicatorSize)));
                     } else if (getString(R.string.key_inactiveIndicatorColorFill).equals(key)) {
                         @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
                         pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
@@ -119,11 +124,12 @@ public class MainActivity extends AppCompatActivity {
                         @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
                         pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
                     } else if (getString(R.string.key_inactiveIndicatorSize).equals(key)) {
-                        int inactiveIndicatorSize = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.integer.default_value_inactiveIndicatorSize);
-                        pageIndicatorView.setInactiveIndicatorSize(inactiveIndicatorSize);
+                        float inactiveIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.dimen.default_value_inactiveIndicatorSize);
+                        pageIndicatorView.setInactiveIndicatorSize(Math.round(pxFromDp(getApplicationContext(), inactiveIndicatorSize)));
+
                     } else if (getString(R.string.key_indicatorGap).equals(key)) {
-                        int indicatorGap = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_indicatorGap, R.integer.default_value_indicatorGap);
-                        pageIndicatorView.setIndicatorGap(indicatorGap);
+                        float indicatorGap = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_indicatorGap, R.dimen.default_value_indicatorGap);
+                        pageIndicatorView.setIndicatorGap(Math.round(pxFromDp(getApplicationContext(), indicatorGap)));
                     } else if (getString(R.string.key_initialPageIndex).equals(key)) {
                         int initialPageIndex = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
                         // TODO

@@ -19,6 +19,7 @@ package de.markusressel.android.pageindicatorview.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DimenRes;
 import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -32,6 +33,19 @@ public class PreferencesHelper {
     public static final String SHARED_PREFS_NAME = "settings";
 
     /**
+     * Get a dimension from preferences
+     *
+     * @param context      application context
+     * @param key          preference key
+     * @param defaultValue default value
+     * @return dimension float
+     */
+    public static float getDimen(@NonNull Context context, @StringRes int key, @DimenRes int defaultValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        return Float.valueOf(sharedPreferences.getString(context.getString(key), String.valueOf(context.getResources().getDimension(defaultValue))));
+    }
+
+    /**
      * Get an integer from preferences
      *
      * @param context      application context
@@ -41,7 +55,7 @@ public class PreferencesHelper {
      */
     public static int getInteger(@NonNull Context context, @StringRes int key, @IntegerRes int defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        return Integer.valueOf(sharedPreferences.getString(context.getString(key), String.valueOf(defaultValue)));
+        return Integer.valueOf(sharedPreferences.getString(context.getString(key), String.valueOf(context.getResources().getInteger(defaultValue))));
     }
 
     /**
