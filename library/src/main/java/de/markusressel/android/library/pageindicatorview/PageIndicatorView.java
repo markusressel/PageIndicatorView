@@ -366,7 +366,6 @@ public class PageIndicatorView extends LinearLayout {
      * @param inactiveIndicatorSize size in pixel
      */
     public void setInactiveIndicatorSize(int inactiveIndicatorSize) {
-
         this.inactiveIndicatorSize = inactiveIndicatorSize;
 
         init();
