@@ -30,7 +30,7 @@ import android.view.View;
  * <p/>
  * Created by Markus on 13.07.2016.
  */
-public class CircleIndicatorView extends View {
+class CircleIndicatorView extends View {
 
     private static final int DEFAULT_DIAMETER = 10;
     private static final int DEFAULT_FILL_COLOR = Color.WHITE;
@@ -40,7 +40,7 @@ public class CircleIndicatorView extends View {
     private float diameter;
     private int fillColor;
     private int strokeColor;
-    private int strokeWidth;
+    private float strokeWidth;
 
     private Paint indicatorFillPaint;
     private Paint indicatorStrokePaint;
@@ -109,11 +109,11 @@ public class CircleIndicatorView extends View {
     }
 
     private int getDesiredWidth() {
-        return (int) Math.ceil((double) diameter + strokeWidth) + 1;
+        return (int) Math.ceil((double) diameter + strokeWidth * 2) + 1;
     }
 
     private int getDesiredHeight() {
-        return (int) Math.ceil((double) diameter + strokeWidth) + 1;
+        return (int) Math.ceil((double) diameter + strokeWidth * 2) + 1;
     }
 
     @Override
@@ -198,7 +198,7 @@ public class CircleIndicatorView extends View {
      *
      * @return stroke width in pixel
      */
-    public int getStrokeWidth() {
+    public float getStrokeWidth() {
         return strokeWidth;
     }
 
@@ -207,7 +207,7 @@ public class CircleIndicatorView extends View {
      *
      * @param strokeWidth stroke width in pixel
      */
-    public void setStrokeWidth(int strokeWidth) {
+    public void setStrokeWidth(float strokeWidth) {
         this.strokeWidth = strokeWidth;
         indicatorStrokePaint.setStrokeWidth(strokeWidth);
 

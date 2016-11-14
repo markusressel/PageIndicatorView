@@ -21,57 +21,71 @@
         <com.rarepebble.colorpicker.ColorPreference
             android:defaultValue="@color/default_value_activeIndicatorColorFill"
             android:key="@string/key_activeIndicatorColorFill"
-            android:title="@string/title_activeIndicatorColorFill" />
+            android:title="@string/title_activeIndicatorColorFill"/>
 
         <com.rarepebble.colorpicker.ColorPreference
             android:defaultValue="@color/default_value_activeIndicatorColorStroke"
             android:key="@string/key_activeIndicatorColorStroke"
-            android:title="@string/title_activeIndicatorColorStroke" />
+            android:title="@string/title_activeIndicatorColorStroke"/>
 
         <EditTextPreference
             android:defaultValue="15"
             android:dialogTitle="@string/title_activeIndicatorSize"
             android:inputType="number"
             android:key="@string/key_activeIndicatorSize"
-            android:title="@string/title_activeIndicatorSize" />
+            android:title="@string/title_activeIndicatorSize"/>
+
+        <EditTextPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/title_activeIndicatorStrokeWidth"
+            android:inputType="number"
+            android:key="@string/key_activeIndicatorStrokeWidth"
+            android:title="@string/title_activeIndicatorStrokeWidth"/>
 
         <com.rarepebble.colorpicker.ColorPreference
             android:defaultValue="@color/default_value_inactiveIndicatorColorFill"
             android:key="@string/key_inactiveIndicatorColorFill"
-            android:title="@string/title_inactiveIndicatorColorFill" />
+            android:title="@string/title_inactiveIndicatorColorFill"/>
 
         <com.rarepebble.colorpicker.ColorPreference
             android:defaultValue="@color/default_value_inactiveIndicatorColorStroke"
             android:key="@string/key_inactiveIndicatorColorStroke"
-            android:title="@string/title_inactiveIndicatorColorStroke" />
+            android:title="@string/title_inactiveIndicatorColorStroke"/>
 
         <EditTextPreference
             android:defaultValue="10"
             android:dialogTitle="@string/title_inactiveIndicatorSize"
             android:inputType="number"
             android:key="@string/key_inactiveIndicatorSize"
-            android:title="@string/title_inactiveIndicatorSize" />
+            android:title="@string/title_inactiveIndicatorSize"/>
+
+        <EditTextPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/title_inactiveIndicatorStrokeWidth"
+            android:inputType="number"
+            android:key="@string/key_inactiveIndicatorStrokeWidth"
+            android:title="@string/title_inactiveIndicatorStrokeWidth"/>
 
         <EditTextPreference
             android:defaultValue="10"
             android:dialogTitle="@string/title_indicatorGap"
             android:inputType="number"
             android:key="@string/key_indicatorGap"
-            android:title="@string/title_indicatorGap" />
+            android:title="@string/title_indicatorGap"/>
 
         <EditTextPreference
             android:defaultValue="@integer/default_value_initialPageIndex"
             android:dialogTitle="@string/title_initialPageIndex"
             android:inputType="number"
             android:key="@string/key_initialPageIndex"
-            android:title="@string/title_initialPageIndex" />
+            android:title="@string/title_initialPageIndex"/>
 
         <EditTextPreference
             android:defaultValue="@integer/default_value_pageCount"
             android:dialogTitle="@string/title_pageCount"
             android:inputType="number"
             android:key="@string/key_pageCount"
-            android:title="@string/title_pageCount" />
+            android:title="@string/title_pageCount"/>
 
     </PreferenceCategory>
 

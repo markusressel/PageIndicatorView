@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
-import android.support.annotation.Dimension;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -44,15 +43,17 @@ public class PageIndicatorView extends LinearLayout {
     private static final String TAG = "PageIndicatorView";
 
     private static final int ANIMATION_DURATION = 250;
-    private static final int DEFAULT_INDICATOR_GAP = 5;
-    private static final int DEFAULT_ACTIVE_INDICATOR_SIZE = 7;
-    private static final int DEFAULT_INACTIVE_INDICATOR_SIZE = 5;
+    private static final float DEFAULT_INDICATOR_GAP_DP = 5; // dp values will be converted to pixels at runtime
+    private static final float DEFAULT_ACTIVE_INDICATOR_SIZE_DP = 7;
+    private static final float DEFAULT_ACTIVE_INDICATOR_STROKE_WIDTH_DP = 1;
+    private static final float DEFAULT_INACTIVE_INDICATOR_SIZE_DP = 5;
+    private static final float DEFAULT_INACTIVE_INDICATOR_STROKE_WIDTH_DP = 1;
     private static final int DEFAULT_PAGE_COUNT = 1;
     private static final int DEFAULT_CURRENT_PAGE_INDEX = 0;
     private static final int DEFAULT_ACTIVE_INDICATOR_FILL_COLOR = Color.WHITE;
-    private static final int DEFAULT_INACTIVE_INDICATOR_FILL_COLOR = Color.WHITE;
+    private static final int DEFAULT_INACTIVE_INDICATOR_FILL_COLOR = Color.GRAY;
     private static final int DEFAULT_ACTIVE_INDICATOR_STROKE_COLOR = Color.WHITE;
-    private static final int DEFAULT_INACTIVE_INDICATOR_STROKE_COLOR = Color.WHITE;
+    private static final int DEFAULT_INACTIVE_INDICATOR_STROKE_COLOR = Color.GRAY;
 
     private int currentPage;
     private int pageCount;
@@ -61,8 +62,10 @@ public class PageIndicatorView extends LinearLayout {
     private int indicatorGap;
     private int activeIndicatorFillColor;
     private int activeIndicatorStrokeColor;
+    private int activeIndicatorStrokeWidth;
     private int inactiveIndicatorFillColor;
     private int inactiveIndicatorStrokeColor;
+    private int inactiveIndicatorStrokeWidth;
 
     private ArrayList<CircleIndicatorView> indicatorViews = new ArrayList<>();
 
@@ -97,13 +100,23 @@ public class PageIndicatorView extends LinearLayout {
         try {
             currentPage = a.getInt(R.styleable.PageIndicatorView_piv_initialPageIndex, DEFAULT_CURRENT_PAGE_INDEX);
             pageCount = a.getInt(R.styleable.PageIndicatorView_piv_pageCount, DEFAULT_PAGE_COUNT);
-            activeIndicatorSize = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_activeIndicatorSize, DEFAULT_ACTIVE_INDICATOR_SIZE);
-            inactiveIndicatorSize = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_inactiveIndicatorSize, DEFAULT_INACTIVE_INDICATOR_SIZE);
-            indicatorGap = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_indicatorGap, DEFAULT_INDICATOR_GAP);
-            activeIndicatorFillColor = a.getColor(R.styleable.PageIndicatorView_piv_activeIndicatorColorFill, DEFAULT_ACTIVE_INDICATOR_FILL_COLOR);
-            activeIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_activeIndicatorColorStroke, DEFAULT_ACTIVE_INDICATOR_STROKE_COLOR);
-            inactiveIndicatorFillColor = a.getColor(R.styleable.PageIndicatorView_piv_inactiveIndicatorColorFill, DEFAULT_INACTIVE_INDICATOR_FILL_COLOR);
-            inactiveIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_inactiveIndicatorColorStroke, DEFAULT_INACTIVE_INDICATOR_STROKE_COLOR);
+
+            activeIndicatorSize = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_activeIndicatorFillSize,
+                    Math.round(DimensionHelper.pxFromDp(context, DEFAULT_ACTIVE_INDICATOR_SIZE_DP)));
+            activeIndicatorFillColor = a.getColor(R.styleable.PageIndicatorView_piv_activeIndicatorFillColor, DEFAULT_ACTIVE_INDICATOR_FILL_COLOR);
+            activeIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_activeIndicatorStrokeColor, DEFAULT_ACTIVE_INDICATOR_STROKE_COLOR);
+            activeIndicatorStrokeWidth = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_activeIndicatorStrokeWidth,
+                    Math.round(DimensionHelper.pxFromDp(context, DEFAULT_ACTIVE_INDICATOR_STROKE_WIDTH_DP)));
+
+            inactiveIndicatorSize = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_inactiveIndicatorFillSize,
+                    Math.round(DimensionHelper.pxFromDp(context, DEFAULT_INACTIVE_INDICATOR_SIZE_DP)));
+            inactiveIndicatorFillColor = a.getColor(R.styleable.PageIndicatorView_piv_inactiveIndicatorFillColor, DEFAULT_INACTIVE_INDICATOR_FILL_COLOR);
+            inactiveIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_inactiveIndicatorStrokeColor, DEFAULT_INACTIVE_INDICATOR_STROKE_COLOR);
+            inactiveIndicatorStrokeWidth = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_inactiveIndicatorStrokeWidth,
+                    Math.round(DimensionHelper.pxFromDp(context, DEFAULT_INACTIVE_INDICATOR_STROKE_WIDTH_DP)));
+
+            indicatorGap = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_indicatorGap,
+                    Math.round(DimensionHelper.pxFromDp(context, DEFAULT_INDICATOR_GAP_DP)));
         } finally {
             a.recycle();
         }
@@ -121,43 +134,56 @@ public class PageIndicatorView extends LinearLayout {
         indicatorViews.clear();
 
         for (int i = 0; i < pageCount; i++) {
+            boolean isFirst = (i == 0);
+            boolean isLast = (i == pageCount - 1);
+
             if (i == currentPage) {
-                addActiveIndicator();
+                addActiveIndicator(isFirst, isLast);
             } else {
-                addInactiveIndicator();
+                addInactiveIndicator(isFirst, isLast);
             }
         }
     }
 
-    private void addActiveIndicator() {
+    private void addActiveIndicator(boolean isFirst, boolean isLast) {
         CircleIndicatorView activeCircleIndicator = new CircleIndicatorView(getContext());
         activeCircleIndicator.setDiameter(activeIndicatorSize);
         activeCircleIndicator.setFillColor(activeIndicatorFillColor);
         activeCircleIndicator.setStrokeColor(activeIndicatorStrokeColor);
+        activeCircleIndicator.setStrokeWidth(activeIndicatorStrokeWidth);
 
         int size = Math.max(activeIndicatorSize, inactiveIndicatorSize) + 1;
         addView(activeCircleIndicator, size, size);
 
         LayoutParams lp = (LayoutParams) activeCircleIndicator.getLayoutParams();
-        lp.leftMargin = indicatorGap / 2;
-        lp.rightMargin = indicatorGap / 2;
+        if (!isFirst) {
+            lp.leftMargin = indicatorGap / 2;
+        }
+        if (isLast) {
+            lp.rightMargin = indicatorGap / 2;
+        }
         activeCircleIndicator.setLayoutParams(lp);
 
         indicatorViews.add(activeCircleIndicator);
     }
 
-    private void addInactiveIndicator() {
+    private void addInactiveIndicator(boolean isFirst, boolean isLast) {
         CircleIndicatorView inactiveCircleIndicator = new CircleIndicatorView(getContext());
         inactiveCircleIndicator.setDiameter(inactiveIndicatorSize);
         inactiveCircleIndicator.setFillColor(inactiveIndicatorFillColor);
         inactiveCircleIndicator.setStrokeColor(inactiveIndicatorStrokeColor);
+        inactiveCircleIndicator.setStrokeWidth(inactiveIndicatorStrokeWidth);
 
         int size = Math.max(activeIndicatorSize, inactiveIndicatorSize) + 1;
         addView(inactiveCircleIndicator, size, size);
 
         LayoutParams lp = (LayoutParams) inactiveCircleIndicator.getLayoutParams();
-        lp.leftMargin = indicatorGap / 2;
-        lp.rightMargin = indicatorGap / 2;
+        if (!isFirst) {
+            lp.leftMargin = indicatorGap / 2;
+        }
+        if (isLast) {
+            lp.rightMargin = indicatorGap / 2;
+        }
         inactiveCircleIndicator.setLayoutParams(lp);
 
         indicatorViews.add(inactiveCircleIndicator);
@@ -196,9 +222,20 @@ public class PageIndicatorView extends LinearLayout {
             }
         });
 
+        ValueAnimator strokeWidthAnimator = ValueAnimator.ofObject(
+                new FloatEvaluator(), indicatorView.getStrokeWidth(), activeIndicatorStrokeWidth);
+        strokeWidthAnimator.setDuration(ANIMATION_DURATION);
+        strokeWidthAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                indicatorView.setStrokeWidth((float) animation.getAnimatedValue());
+            }
+        });
+
         sizeAnimator.start();
         fillColorAnimator.start();
         strokeColorAnimator.start();
+        strokeWidthAnimator.start();
     }
 
     private void animateToInactiveIndicator(int index) {
@@ -234,9 +271,20 @@ public class PageIndicatorView extends LinearLayout {
             }
         });
 
+        ValueAnimator strokeWidthAnimator = ValueAnimator.ofObject(
+                new FloatEvaluator(), indicatorView.getStrokeWidth(), inactiveIndicatorStrokeWidth);
+        strokeWidthAnimator.setDuration(ANIMATION_DURATION);
+        strokeWidthAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                indicatorView.setStrokeWidth((float) animation.getAnimatedValue());
+            }
+        });
+
         sizeAnimator.start();
         fillColorAnimator.start();
         strokeColorAnimator.start();
+        strokeWidthAnimator.start();
     }
 
     /**
@@ -448,6 +496,18 @@ public class PageIndicatorView extends LinearLayout {
         if (animated) {
             animateToInactiveIndicator(currentPage);
             animateToActiveIndicator(index);
+        } else {
+            CircleIndicatorView currentIndicatorView = indicatorViews.get(currentPage);
+            currentIndicatorView.setDiameter(inactiveIndicatorSize);
+            currentIndicatorView.setFillColor(inactiveIndicatorFillColor);
+            currentIndicatorView.setStrokeColor(inactiveIndicatorStrokeColor);
+            currentIndicatorView.setStrokeWidth(inactiveIndicatorStrokeWidth);
+
+            CircleIndicatorView newIndicatorView = indicatorViews.get(index);
+            newIndicatorView.setDiameter(activeIndicatorSize);
+            newIndicatorView.setFillColor(activeIndicatorFillColor);
+            newIndicatorView.setStrokeColor(activeIndicatorStrokeColor);
+            newIndicatorView.setStrokeWidth(activeIndicatorStrokeWidth);
         }
 
         currentPage = index;
@@ -456,4 +516,27 @@ public class PageIndicatorView extends LinearLayout {
         requestLayout();
     }
 
+    /**
+     * Set the new stroke width for an active indicator
+     *
+     * @param width width in pixel
+     */
+    public void setActiveIndicatorStrokeWidth(int width) {
+        this.activeIndicatorStrokeWidth = width;
+
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Set the new stroke width for an inactive indicator
+     *
+     * @param width width in pixel
+     */
+    public void setInactiveIndicatorStrokeWidth(int width) {
+        this.inactiveIndicatorStrokeWidth = width;
+
+        invalidate();
+        requestLayout();
+    }
 }

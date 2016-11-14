@@ -22,7 +22,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -124,10 +123,12 @@ public class MainActivity extends AppCompatActivity {
         @ColorInt int activeIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorFill, getResources().getColor(R.color.default_value_activeIndicatorColorFill));
         @ColorInt int activeIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_activeIndicatorColorStroke, getResources().getColor(R.color.default_value_activeIndicatorColorStroke));
         float activeIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_activeIndicatorSize, R.dimen.default_value_activeIndicatorSize);
+        float activeIndicatorStrokeWidth = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_activeIndicatorStrokeWidth, R.dimen.default_value_activeIndicatorStrokeWidth);
 
         @ColorInt int inactiveIndicatorColorFill = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorFill, getResources().getColor(R.color.default_value_inactiveIndicatorColorFill));
         @ColorInt int inactiveIndicatorColorStroke = PreferencesHelper.getColor(getApplicationContext(), R.string.key_inactiveIndicatorColorStroke, getResources().getColor(R.color.default_value_inactiveIndicatorColorStroke));
         float inactiveIndicatorSize = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_inactiveIndicatorSize, R.dimen.default_value_inactiveIndicatorSize);
+        float inactiveIndicatorStrokeWidth = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_inactiveIndicatorStrokeWidth, R.dimen.default_value_inactiveIndicatorStrokeWidth);
 
         float indicatorGap = PreferencesHelper.getDimen(getApplicationContext(), R.string.key_indicatorGap, R.dimen.default_value_indicatorGap);
         int initialPageIndex = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
@@ -136,10 +137,12 @@ public class MainActivity extends AppCompatActivity {
         pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorColorFill);
         pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorColorStroke);
         pageIndicatorView.setActiveIndicatorSize(Math.round(pxFromDp(this, activeIndicatorSize)));
+        pageIndicatorView.setActiveIndicatorStrokeWidth(Math.round(pxFromDp(this, activeIndicatorStrokeWidth)));
 
         pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
         pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
         pageIndicatorView.setInactiveIndicatorSize(Math.round(pxFromDp(this, inactiveIndicatorSize)));
+        pageIndicatorView.setInactiveIndicatorStrokeWidth(Math.round(pxFromDp(this, inactiveIndicatorStrokeWidth)));
 
         pageIndicatorView.setIndicatorGap(Math.round(pxFromDp(this, indicatorGap)));
 

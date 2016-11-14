@@ -19,13 +19,15 @@
     <declare-styleable name="PageIndicatorView">
         <attr name="piv_pageCount" format="integer" />
         <attr name="piv_initialPageIndex" format="integer" />
-        <attr name="piv_activeIndicatorSize" format="dimension" />
-        <attr name="piv_inactiveIndicatorSize" format="dimension" />
         <attr name="piv_indicatorGap" format="dimension" />
-        <attr name="piv_activeIndicatorColorFill" format="color" />
-        <attr name="piv_activeIndicatorColorStroke" format="color" />
-        <attr name="piv_inactiveIndicatorColorFill" format="color" />
-        <attr name="piv_inactiveIndicatorColorStroke" format="color" />
+        <attr name="piv_activeIndicatorFillSize" format="dimension" />
+        <attr name="piv_activeIndicatorFillColor" format="color" />
+        <attr name="piv_activeIndicatorStrokeColor" format="color" />
+        <attr name="piv_activeIndicatorStrokeWidth" format="dimension" />
+        <attr name="piv_inactiveIndicatorFillSize" format="dimension" />
+        <attr name="piv_inactiveIndicatorFillColor" format="color" />
+        <attr name="piv_inactiveIndicatorStrokeColor" format="color" />
+        <attr name="piv_inactiveIndicatorStrokeWidth" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="CircleIndicatorView">
