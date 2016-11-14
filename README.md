@@ -30,31 +30,33 @@ If you want you can change the style of the indicators by using attributes
 
     <de.markusressel.android.library.pageindicatorview.PageIndicatorView
             android:id="@+id/pageIndicator"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="38dp"
-            app:piv_activeIndicatorColorFill="?attr/colorAccent"
-            app:piv_activeIndicatorColorStroke="?attr/colorAccent"
-            app:piv_activeIndicatorSize="10dp"
-            app:piv_inactiveIndicatorColorFill="#444444"
-            app:piv_inactiveIndicatorColorStroke="#444444"
-            app:piv_inactiveIndicatorSize="7dp"
-            app:piv_indicatorGap="10dp"
-            app:piv_initialPageIndex="0"
-            app:piv_pageCount="3"/>
+            android:layout_weight="0"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            app:piv_activeIndicatorFillColor="?attr/colorAccent"
+            app:piv_activeIndicatorFillSize="20dp"
+            app:piv_activeIndicatorStrokeColor="@android:color/white"
+            app:piv_activeIndicatorStrokeWidth="5dp"
+            app:piv_inactiveIndicatorFillColor="?attr/colorAccent"
+            app:piv_inactiveIndicatorFillSize="15dp"
+            app:piv_inactiveIndicatorStrokeColor="@android:color/darker_gray"
+            app:piv_inactiveIndicatorStrokeWidth="10dp"
+            app:piv_pageCount="5" />
 
 You can also set these values in code using the following methods:
 
-    pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorFillColor);
-    pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorStrokeColor);
-    pageIndicatorView.setActiveIndicatorSize(activeIndicatorSizeInPixels);
+    pageIndicatorView.setActiveIndicatorSize(activeIndicatorSize);
+    pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorColorFill);
+    pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorColorStroke);
+    pageIndicatorView.setActiveIndicatorStrokeWidth(activeIndicatorStrokeWidth);
 
-    pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorFillColor);
-    pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorStrokeColor);
-    pageIndicatorView.setInactiveIndicatorSize(inactiveIndicatorSizeInPixels);
+    pageIndicatorView.setInactiveIndicatorSize(inactiveIndicatorSize);
+    pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
+    pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
+    pageIndicatorView.setInactiveIndicatorStrokeWidth(inactiveIndicatorStrokeWidth);
 
-    pageIndicatorView.setIndicatorGap(indicatorGapInPixels);
+    pageIndicatorView.setIndicatorGap(indicatorGap);
 
     pageIndicatorView.setPageCount(pageCount);
 
