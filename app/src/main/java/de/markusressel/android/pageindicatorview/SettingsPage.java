@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
-import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.LocalBroadcastManager;
@@ -48,6 +47,8 @@ public class SettingsPage extends PreferenceFragment implements SharedPreference
     private ColorPreference inactiveIndicatorStrokeColor;
     private EditTextPreference initialPageIndex;
     private EditTextPreference pageCount;
+    private EditTextPreference activeIndicatorStrokeWidth;
+    private EditTextPreference inactiveIndicatorStrokeWidth;
 
     public static SettingsPage newInstance() {
         Bundle args = new Bundle();
@@ -83,24 +84,30 @@ public class SettingsPage extends PreferenceFragment implements SharedPreference
     }
 
     private void initPreferences() {
-        activeIndicatorFillColor = (ColorPreference) findPreference(getString(R.string.key_activeIndicatorColorFill));
+        activeIndicatorFillColor = (ColorPreference) findPreference(getString(R.string.key_activeIndicatorFillColor));
         activeIndicatorFillColor.setSummary(colorToHex(activeIndicatorFillColor.getColor()));
 
-        activeIndicatorStrokeColor = (ColorPreference) findPreference(getString(R.string.key_activeIndicatorColorStroke));
+        activeIndicatorStrokeColor = (ColorPreference) findPreference(getString(R.string.key_activeIndicatorStrokeColor));
         activeIndicatorStrokeColor.setSummary(colorToHex(activeIndicatorStrokeColor.getColor()));
 
-        activeIndicatorSize = (EditTextPreference) findPreference(getString(R.string.key_activeIndicatorSize));
+        activeIndicatorSize = (EditTextPreference) findPreference(getString(R.string.key_activeIndicatorFillSize));
         activeIndicatorSize.setSummary(getString(R.string.summary_activeIndicatorSize, activeIndicatorSize.getText()));
 
+        activeIndicatorStrokeWidth = (EditTextPreference) findPreference(getString(R.string.key_activeIndicatorStrokeWidth));
+        activeIndicatorStrokeWidth.setSummary(getString(R.string.summary_activeIndicatorStrokeWidth, activeIndicatorStrokeWidth.getText()));
 
-        inactiveIndicatorFillColor = (ColorPreference) findPreference(getString(R.string.key_inactiveIndicatorColorFill));
+
+        inactiveIndicatorFillColor = (ColorPreference) findPreference(getString(R.string.key_inactiveIndicatorFillColor));
         inactiveIndicatorFillColor.setSummary(colorToHex(inactiveIndicatorFillColor.getColor()));
 
-        inactiveIndicatorStrokeColor = (ColorPreference) findPreference(getString(R.string.key_inactiveIndicatorColorStroke));
+        inactiveIndicatorStrokeColor = (ColorPreference) findPreference(getString(R.string.key_inactiveIndicatorStrokeColor));
         inactiveIndicatorStrokeColor.setSummary(colorToHex(inactiveIndicatorStrokeColor.getColor()));
 
-        inactiveIndicatorSize = (EditTextPreference) findPreference(getString(R.string.key_inactiveIndicatorSize));
+        inactiveIndicatorSize = (EditTextPreference) findPreference(getString(R.string.key_inactiveIndicatorFillSize));
         inactiveIndicatorSize.setSummary(getString(R.string.summary_inactiveIndicatorSize, inactiveIndicatorSize.getText()));
+
+        inactiveIndicatorStrokeWidth = (EditTextPreference) findPreference(getString(R.string.key_inactiveIndicatorStrokeWidth));
+        inactiveIndicatorStrokeWidth.setSummary(getString(R.string.summary_inactiveIndicatorStrokeWidth, inactiveIndicatorStrokeWidth.getText()));
 
 
         indicatorGap = (EditTextPreference) findPreference(getString(R.string.key_indicatorGap));
@@ -122,18 +129,22 @@ public class SettingsPage extends PreferenceFragment implements SharedPreference
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (getString(R.string.key_activeIndicatorColorFill).equals(key)) {
+        if (getString(R.string.key_activeIndicatorFillColor).equals(key)) {
             activeIndicatorFillColor.setSummary(colorToHex(activeIndicatorFillColor.getColor()));
-        } else if (getString(R.string.key_activeIndicatorColorStroke).equals(key)) {
+        } else if (getString(R.string.key_activeIndicatorStrokeColor).equals(key)) {
             activeIndicatorStrokeColor.setSummary(colorToHex(activeIndicatorStrokeColor.getColor()));
-        } else if (getString(R.string.key_activeIndicatorSize).equals(key)) {
+        } else if (getString(R.string.key_activeIndicatorFillSize).equals(key)) {
             activeIndicatorSize.setSummary(getString(R.string.summary_activeIndicatorSize, activeIndicatorSize.getText()));
-        } else if (getString(R.string.key_inactiveIndicatorColorFill).equals(key)) {
+        } else if (getString(R.string.key_activeIndicatorStrokeWidth).equals(key)) {
+            activeIndicatorStrokeWidth.setSummary(getString(R.string.summary_activeIndicatorStrokeWidth, activeIndicatorStrokeWidth.getText()));
+        } else if (getString(R.string.key_inactiveIndicatorFillColor).equals(key)) {
             inactiveIndicatorFillColor.setSummary(colorToHex(inactiveIndicatorFillColor.getColor()));
-        } else if (getString(R.string.key_inactiveIndicatorColorStroke).equals(key)) {
+        } else if (getString(R.string.key_inactiveIndicatorStrokeColor).equals(key)) {
             inactiveIndicatorStrokeColor.setSummary(colorToHex(inactiveIndicatorStrokeColor.getColor()));
-        } else if (getString(R.string.key_inactiveIndicatorSize).equals(key)) {
+        } else if (getString(R.string.key_inactiveIndicatorFillSize).equals(key)) {
             inactiveIndicatorSize.setSummary(getString(R.string.summary_inactiveIndicatorSize, inactiveIndicatorSize.getText()));
+        } else if (getString(R.string.key_inactiveIndicatorStrokeWidth).equals(key)) {
+            inactiveIndicatorStrokeWidth.setSummary(getString(R.string.summary_inactiveIndicatorStrokeWidth, inactiveIndicatorStrokeWidth.getText()));
         } else if (getString(R.string.key_indicatorGap).equals(key)) {
             indicatorGap.setSummary(getString(R.string.summary_indicatorGap, indicatorGap.getText()));
         } else if (getString(R.string.key_initialPageIndex).equals(key)) {

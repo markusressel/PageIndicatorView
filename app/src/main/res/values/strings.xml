@@ -19,17 +19,17 @@
 
     <string name="settings">Settings</string>
 
-    <string name="key_activeIndicatorColorFill">activeIndicatorColorFill</string>
-    <string name="title_activeIndicatorColorFill">Active indicator fill color</string>
-    <color name="default_value_activeIndicatorColorFill">@color/activeIndicatorColorFill</color>
+    <string name="key_activeIndicatorFillColor">activeIndicatorColorFill</string>
+    <string name="title_activeIndicatorFillColor">Active indicator fill color</string>
+    <color name="default_value_activeIndicatorFillColor">@color/activeIndicatorColorFill</color>
 
-    <string name="key_activeIndicatorColorStroke">activeIndicatorColorStroke</string>
-    <string name="title_activeIndicatorColorStroke">Active indictor stroke color</string>
-    <color name="default_value_activeIndicatorColorStroke">@color/activeIndicatorColorStroke</color>
+    <string name="key_activeIndicatorStrokeColor">activeIndicatorColorStroke</string>
+    <string name="title_activeIndicatorStrokeColor">Active indictor stroke color</string>
+    <color name="default_value_activeIndicatorStrokeColor">@color/activeIndicatorColorStroke</color>
 
-    <string name="key_activeIndicatorSize">activeIndicatorSize</string>
-    <string name="title_activeIndicatorSize">Active indicator size</string>
-    <dimen name="default_value_activeIndicatorSize">10dp</dimen>
+    <string name="key_activeIndicatorFillSize">activeIndicatorSize</string>
+    <string name="title_activeIndicatorFillSize">Active indicator size</string>
+    <dimen name="default_value_activeIndicatorFillSize">10dp</dimen>
     <string name="summary_activeIndicatorSize">%1$sdp</string>
 
     <string name="key_activeIndicatorStrokeWidth">activeIndicatorStrokeWidth</string>
@@ -38,18 +38,18 @@
     <string name="summary_activeIndicatorStrokeWidth">%1$sdp</string>
 
 
-    <string name="key_inactiveIndicatorColorFill">inactiveIndicatorColorFill</string>
-    <string name="title_inactiveIndicatorColorFill">Inactive indicator fill color</string>
-    <color name="default_value_inactiveIndicatorColorFill">@color/inactiveIndicatorColorFill</color>
+    <string name="key_inactiveIndicatorFillColor">inactiveIndicatorColorFill</string>
+    <string name="title_inactiveIndicatorFillColor">Inactive indicator fill color</string>
+    <color name="default_value_inactiveIndicatorFillColor">@color/inactiveIndicatorColorFill</color>
 
-    <string name="key_inactiveIndicatorColorStroke">inactiveIndicatorColorStroke</string>
-    <string name="title_inactiveIndicatorColorStroke">Inactive indicator stroke color</string>
-    <color name="default_value_inactiveIndicatorColorStroke">@color/inactiveIndicatorColorStroke
+    <string name="key_inactiveIndicatorStrokeColor">inactiveIndicatorColorStroke</string>
+    <string name="title_inactiveIndicatorStrokeColor">Inactive indicator stroke color</string>
+    <color name="default_value_inactiveIndicatorStrokeColor">@color/inactiveIndicatorColorStroke
     </color>
 
-    <string name="key_inactiveIndicatorSize">inactiveIndicatorSize</string>
-    <string name="title_inactiveIndicatorSize">Inactive indicator size</string>
-    <dimen name="default_value_inactiveIndicatorSize">15dp</dimen>
+    <string name="key_inactiveIndicatorFillSize">inactiveIndicatorSize</string>
+    <string name="title_inactiveIndicatorFillSize">Inactive indicator size</string>
+    <dimen name="default_value_inactiveIndicatorFillSize">15dp</dimen>
     <string name="summary_inactiveIndicatorSize">%1$sdp</string>
 
     <string name="key_inactiveIndicatorStrokeWidth">inactiveIndicatorStrokeWidth</string>

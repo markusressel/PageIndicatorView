@@ -98,22 +98,44 @@ class CircleIndicatorView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //Get the width measurement
-        int widthSize = View.resolveSize(getDesiredWidth(), widthMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        //Get the height measurement
-        int heightSize = View.resolveSize(getDesiredHeight(), heightMeasureSpec);
+        int viewWidth = (int) Math.ceil(diameter) + (int) Math.ceil(strokeWidth) * 2 + this.getPaddingLeft() + this.getPaddingRight();
+        int viewHeight = (int) Math.ceil(diameter) + (int) Math.ceil(strokeWidth) * 2 + this.getPaddingTop() + this.getPaddingBottom();
 
-        //MUST call this to store the measurements
-        setMeasuredDimension(widthSize, heightSize);
-    }
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-    private int getDesiredWidth() {
-        return (int) Math.ceil((double) diameter + strokeWidth * 2) + 1;
-    }
+        int width;
+        int height;
 
-    private int getDesiredHeight() {
-        return (int) Math.ceil((double) diameter + strokeWidth * 2) + 1;
+        //Measure Width
+        if (widthMode == MeasureSpec.EXACTLY) {
+            //Must be this size
+            width = widthSize;
+        } else if (widthMode == MeasureSpec.AT_MOST) {
+            //Can't be bigger than...
+            width = Math.min(viewWidth, widthSize);
+        } else {
+            //Be whatever you want
+            width = viewWidth;
+        }
+
+        //Measure Height
+        if (heightMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.EXACTLY) {
+            //Must be this size
+            height = heightSize;
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            //Can't be bigger than...
+            height = Math.min(viewHeight, heightSize);
+        } else {
+            //Be whatever you want
+            height = viewHeight;
+        }
+
+        setMeasuredDimension(width, height);
     }
 
     @Override
@@ -122,7 +144,7 @@ class CircleIndicatorView extends View {
 
         float x = getWidth() / 2;
         float y = getHeight() / 2;
-        float radius = diameter / 2;
+        float radius = diameter / 2.0f;
 
         canvas.drawCircle(x, y, radius, indicatorFillPaint);
         canvas.drawCircle(x, y, radius, indicatorStrokePaint);
@@ -143,7 +165,7 @@ class CircleIndicatorView extends View {
      * @param newDiameter new diameter value
      */
     public void setDiameter(float newDiameter) {
-        diameter = newDiameter;
+        this.diameter = newDiameter;
 
         invalidate();
         requestLayout();

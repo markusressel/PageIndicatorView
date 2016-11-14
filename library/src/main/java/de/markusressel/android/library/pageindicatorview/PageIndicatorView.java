@@ -27,6 +27,7 @@ import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -57,15 +58,17 @@ public class PageIndicatorView extends LinearLayout {
 
     private int currentPage;
     private int pageCount;
-    private int activeIndicatorSize;
-    private int inactiveIndicatorSize;
-    private int indicatorGap;
+    private float activeIndicatorSize;
+    private float inactiveIndicatorSize;
+    private float indicatorGap;
     private int activeIndicatorFillColor;
     private int activeIndicatorStrokeColor;
-    private int activeIndicatorStrokeWidth;
+    private float activeIndicatorStrokeWidth;
     private int inactiveIndicatorFillColor;
     private int inactiveIndicatorStrokeColor;
-    private int inactiveIndicatorStrokeWidth;
+    private float inactiveIndicatorStrokeWidth;
+
+    private OnIndicatorClickedListener onIndicatorClickedListener;
 
     private ArrayList<CircleIndicatorView> indicatorViews = new ArrayList<>();
 
@@ -133,60 +136,64 @@ public class PageIndicatorView extends LinearLayout {
         removeAllViews();
         indicatorViews.clear();
 
+        int indicatorSize = (int) Math.max(activeIndicatorSize, inactiveIndicatorSize) +
+                (int) Math.max(activeIndicatorStrokeWidth, inactiveIndicatorStrokeWidth) + 1;
+
         for (int i = 0; i < pageCount; i++) {
             boolean isFirst = (i == 0);
             boolean isLast = (i == pageCount - 1);
 
+            final int currentIndex = i;
+
+            CircleIndicatorView indicator;
             if (i == currentPage) {
-                addActiveIndicator(isFirst, isLast);
+                indicator = getActiveIndicator();
             } else {
-                addInactiveIndicator(isFirst, isLast);
+                indicator = getInactiveIndicator();
             }
+
+            indicator.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onIndicatorClickedListener != null) {
+                        onIndicatorClickedListener.onIndicatorClicked(currentIndex);
+                    }
+                }
+            });
+
+            addView(indicator, indicatorSize, indicatorSize);
+
+            LayoutParams lp = (LayoutParams) indicator.getLayoutParams();
+            if (!isFirst) {
+                lp.leftMargin = (int) indicatorGap / 2;
+            }
+            if (!isLast) {
+                lp.rightMargin = (int) indicatorGap / 2;
+            }
+            indicator.setLayoutParams(lp);
+
+            indicatorViews.add(indicator);
         }
     }
 
-    private void addActiveIndicator(boolean isFirst, boolean isLast) {
+    private CircleIndicatorView getActiveIndicator() {
         CircleIndicatorView activeCircleIndicator = new CircleIndicatorView(getContext());
         activeCircleIndicator.setDiameter(activeIndicatorSize);
         activeCircleIndicator.setFillColor(activeIndicatorFillColor);
         activeCircleIndicator.setStrokeColor(activeIndicatorStrokeColor);
         activeCircleIndicator.setStrokeWidth(activeIndicatorStrokeWidth);
 
-        int size = Math.max(activeIndicatorSize, inactiveIndicatorSize) + 1;
-        addView(activeCircleIndicator, size, size);
-
-        LayoutParams lp = (LayoutParams) activeCircleIndicator.getLayoutParams();
-        if (!isFirst) {
-            lp.leftMargin = indicatorGap / 2;
-        }
-        if (isLast) {
-            lp.rightMargin = indicatorGap / 2;
-        }
-        activeCircleIndicator.setLayoutParams(lp);
-
-        indicatorViews.add(activeCircleIndicator);
+        return activeCircleIndicator;
     }
 
-    private void addInactiveIndicator(boolean isFirst, boolean isLast) {
+    private CircleIndicatorView getInactiveIndicator() {
         CircleIndicatorView inactiveCircleIndicator = new CircleIndicatorView(getContext());
         inactiveCircleIndicator.setDiameter(inactiveIndicatorSize);
         inactiveCircleIndicator.setFillColor(inactiveIndicatorFillColor);
         inactiveCircleIndicator.setStrokeColor(inactiveIndicatorStrokeColor);
         inactiveCircleIndicator.setStrokeWidth(inactiveIndicatorStrokeWidth);
 
-        int size = Math.max(activeIndicatorSize, inactiveIndicatorSize) + 1;
-        addView(inactiveCircleIndicator, size, size);
-
-        LayoutParams lp = (LayoutParams) inactiveCircleIndicator.getLayoutParams();
-        if (!isFirst) {
-            lp.leftMargin = indicatorGap / 2;
-        }
-        if (isLast) {
-            lp.rightMargin = indicatorGap / 2;
-        }
-        inactiveCircleIndicator.setLayoutParams(lp);
-
-        indicatorViews.add(inactiveCircleIndicator);
+        return inactiveCircleIndicator;
     }
 
     private void animateToActiveIndicator(int index) {
@@ -338,7 +345,7 @@ public class PageIndicatorView extends LinearLayout {
      *
      * @return size in pixel
      */
-    public int getActiveIndicatorSize() {
+    public float getActiveIndicatorSize() {
         return activeIndicatorSize;
     }
 
@@ -406,7 +413,7 @@ public class PageIndicatorView extends LinearLayout {
      *
      * @return size in pixel
      */
-    public int getInactiveIndicatorSize() {
+    public float getInactiveIndicatorSize() {
         return inactiveIndicatorSize;
     }
 
@@ -415,7 +422,7 @@ public class PageIndicatorView extends LinearLayout {
      *
      * @param inactiveIndicatorSize size in pixel
      */
-    public void setInactiveIndicatorSize(int inactiveIndicatorSize) {
+    public void setInactiveIndicatorSize(float inactiveIndicatorSize) {
         this.inactiveIndicatorSize = inactiveIndicatorSize;
 
         init();
@@ -428,7 +435,7 @@ public class PageIndicatorView extends LinearLayout {
      *
      * @return gap size in pixel
      */
-    public int getIndicatorGap() {
+    public float getIndicatorGap() {
         return indicatorGap;
     }
 
@@ -437,7 +444,7 @@ public class PageIndicatorView extends LinearLayout {
      *
      * @param indicatorGap gap size in pixel
      */
-    public void setIndicatorGap(int indicatorGap) {
+    public void setIndicatorGap(float indicatorGap) {
         this.indicatorGap = indicatorGap;
 
         init();
@@ -521,8 +528,18 @@ public class PageIndicatorView extends LinearLayout {
      *
      * @param width width in pixel
      */
-    public void setActiveIndicatorStrokeWidth(int width) {
-        this.activeIndicatorStrokeWidth = width;
+    public void setActiveIndicatorStrokeWidth(float width) {
+        this.activeIndicatorStrokeWidth = width - 1;
+
+        for (int i = 0; i < pageCount; i++) {
+            if (i == currentPage) {
+                CircleIndicatorView circle = indicatorViews.get(i);
+                circle.setStrokeWidth(activeIndicatorStrokeWidth);
+                break;
+            }
+        }
+
+        init();
 
         invalidate();
         requestLayout();
@@ -533,10 +550,28 @@ public class PageIndicatorView extends LinearLayout {
      *
      * @param width width in pixel
      */
-    public void setInactiveIndicatorStrokeWidth(int width) {
-        this.inactiveIndicatorStrokeWidth = width;
+    public void setInactiveIndicatorStrokeWidth(float width) {
+        this.inactiveIndicatorStrokeWidth = width - 1;
+
+        for (int i = 0; i < pageCount; i++) {
+            if (i != currentPage) {
+                CircleIndicatorView circle = indicatorViews.get(i);
+                circle.setStrokeWidth(inactiveIndicatorStrokeWidth);
+            }
+        }
+
+        init();
 
         invalidate();
         requestLayout();
+    }
+
+    /**
+     * Set a listener to OnClick events from indicators.
+     *
+     * @param listener OnIndicatorClickedListener
+     */
+    public void setOnIndicatorClickedListener(OnIndicatorClickedListener listener) {
+        onIndicatorClickedListener = listener;
     }
 }
