@@ -23,6 +23,11 @@ package de.markusressel.android.library.pageindicatorview;
  */
 public interface OnIndicatorClickedListener {
 
+    /**
+     * Called when an indicator is clicked
+     *
+     * @param index position of this indicator
+     */
     void onIndicatorClicked(int index);
 
 }
