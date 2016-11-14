@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         pageIndicatorView = (PageIndicatorView) findViewById(R.id.pageIndicator);
         pageIndicatorView.setOnIndicatorClickedListener(new OnIndicatorClickedListener() {
             @Override
-            public void onIndicatorClicked(int index) {
+            public void onIndicatorClicked(PageIndicatorView pageIndicatorView, int index) {
                 pageIndicatorView.setCurrentPage(index, true);
                 tabViewPager.setCurrentItem(index);
             }
@@ -191,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             if (position == 0) {
                 return SettingsPage.newInstance();
+            } else if (position == 1) {
+                return DemonstrationPage.newInstance();
             } else {
                 return SamplePage.newInstance("Page: " + (position + 1));
             }

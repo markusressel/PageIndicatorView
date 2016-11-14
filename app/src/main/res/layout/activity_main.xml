@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         app:piv_activeIndicatorFillColor="?attr/colorAccent"
         app:piv_activeIndicatorFillSize="10dp"
@@ -45,33 +46,6 @@
         app:piv_inactiveIndicatorStrokeWidth="2dp"
         app:piv_indicatorGap="10dp"
         app:piv_initialPageIndex="0"
-        app:piv_pageCount="3" />
-
-    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
-        android:id="@+id/pageIndicator2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        app:piv_activeIndicatorFillColor="?attr/colorAccent"
-        app:piv_activeIndicatorFillSize="10dp"
-        app:piv_activeIndicatorStrokeColor="@android:color/white"
-        app:piv_activeIndicatorStrokeWidth="1dp"
-        app:piv_inactiveIndicatorFillColor="#444444"
-        app:piv_inactiveIndicatorFillSize="7dp"
-        app:piv_inactiveIndicatorStrokeColor="@android:color/white"
-        app:piv_inactiveIndicatorStrokeWidth="1dp"
-        app:piv_indicatorGap="10dp"
-        app:piv_initialPageIndex="0"
-        app:piv_pageCount="3" />
-
-    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
-        android:id="@+id/pageIndicator3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         app:piv_pageCount="3" />
 
 </LinearLayout>

@@ -26,8 +26,9 @@ public interface OnIndicatorClickedListener {
     /**
      * Called when an indicator is clicked
      *
-     * @param index position of this indicator
+     * @param pageIndicatorView the PageIndicatorView that holds this indicator
+     * @param index             position of this indicator
      */
-    void onIndicatorClicked(int index);
+    void onIndicatorClicked(PageIndicatorView pageIndicatorView, int index);
 
 }

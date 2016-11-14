@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016 Markus Ressel
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/demonstration_page_title" />
+
+    <!--
+        Default look
+    -->
+    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
+        android:id="@+id/pageIndicator1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:piv_pageCount="5" />
+
+    <!--
+        Size stays the same
+        The outline grows bigger when active while keeping the transparent size of the middle
+    -->
+    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
+        android:id="@+id/pageIndicator2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:piv_activeIndicatorFillColor="?attr/colorAccent"
+        app:piv_activeIndicatorFillSize="10dp"
+        app:piv_inactiveIndicatorFillColor="#00ff00"
+        app:piv_inactiveIndicatorFillSize="10dp"
+        app:piv_initialPageIndex="0"
+        app:piv_pageCount="5" />
+
+    <!--
+        Transparent center
+        The outline grows bigger when active while keeping the transparent size of the middle
+    -->
+    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
+        android:id="@+id/pageIndicator3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:piv_activeIndicatorFillColor="#0000"
+        app:piv_activeIndicatorFillSize="15dp"
+        app:piv_activeIndicatorStrokeColor="@android:color/white"
+        app:piv_activeIndicatorStrokeWidth="10dp"
+        app:piv_inactiveIndicatorFillColor="#0000"
+        app:piv_inactiveIndicatorFillSize="10dp"
+        app:piv_inactiveIndicatorStrokeColor="@android:color/darker_gray"
+        app:piv_inactiveIndicatorStrokeWidth="5dp"
+        app:piv_initialPageIndex="0"
+        app:piv_pageCount="5" />
+
+    <!--
+       Transparent center
+       The overall size keeps the same but the stroke grows inwards when active
+   -->
+    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
+        android:id="@+id/pageIndicator4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:piv_activeIndicatorFillColor="#0000"
+        app:piv_activeIndicatorFillSize="15dp"
+        app:piv_activeIndicatorStrokeColor="@android:color/white"
+        app:piv_activeIndicatorStrokeWidth="10dp"
+        app:piv_inactiveIndicatorFillColor="#0000"
+        app:piv_inactiveIndicatorFillSize="20dp"
+        app:piv_inactiveIndicatorStrokeColor="@android:color/darker_gray"
+        app:piv_inactiveIndicatorStrokeWidth="5dp"
+        app:piv_pageCount="5" />
+
+    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
+        android:id="@+id/pageIndicator5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:piv_pageCount="5" />
+
+</LinearLayout>

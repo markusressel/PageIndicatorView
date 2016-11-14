@@ -19,6 +19,8 @@
 
     <string name="settings">Settings</string>
 
+    <string name="demonstration_page_title">Indicator configurations for demonstration purpose. Only the bottom one (visible on each page) will update in realtime accordingly to the settings you make. Click on any indicator to see the active and inactive state of each style.</string>
+
     <string name="key_activeIndicatorFillColor">activeIndicatorColorFill</string>
     <string name="title_activeIndicatorFillColor">Active indicator fill color</string>
     <color name="default_value_activeIndicatorFillColor">@color/activeIndicatorColorFill</color>

@@ -23,6 +23,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.pdf.PdfDocument;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -46,15 +47,13 @@ public class PageIndicatorView extends LinearLayout {
     private static final int ANIMATION_DURATION = 250;
     private static final float DEFAULT_INDICATOR_GAP_DP = 5; // dp values will be converted to pixels at runtime
     private static final float DEFAULT_ACTIVE_INDICATOR_SIZE_DP = 7;
-    private static final float DEFAULT_ACTIVE_INDICATOR_STROKE_WIDTH_DP = 1;
+    private static final float DEFAULT_ACTIVE_INDICATOR_STROKE_WIDTH_DP = 0;
     private static final float DEFAULT_INACTIVE_INDICATOR_SIZE_DP = 5;
-    private static final float DEFAULT_INACTIVE_INDICATOR_STROKE_WIDTH_DP = 1;
+    private static final float DEFAULT_INACTIVE_INDICATOR_STROKE_WIDTH_DP = 0;
     private static final int DEFAULT_PAGE_COUNT = 1;
     private static final int DEFAULT_CURRENT_PAGE_INDEX = 0;
     private static final int DEFAULT_ACTIVE_INDICATOR_FILL_COLOR = Color.WHITE;
     private static final int DEFAULT_INACTIVE_INDICATOR_FILL_COLOR = Color.GRAY;
-    private static final int DEFAULT_ACTIVE_INDICATOR_STROKE_COLOR = Color.WHITE;
-    private static final int DEFAULT_INACTIVE_INDICATOR_STROKE_COLOR = Color.GRAY;
 
     private int currentPage;
     private int pageCount;
@@ -107,14 +106,14 @@ public class PageIndicatorView extends LinearLayout {
             activeIndicatorSize = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_activeIndicatorFillSize,
                     Math.round(DimensionHelper.pxFromDp(context, DEFAULT_ACTIVE_INDICATOR_SIZE_DP)));
             activeIndicatorFillColor = a.getColor(R.styleable.PageIndicatorView_piv_activeIndicatorFillColor, DEFAULT_ACTIVE_INDICATOR_FILL_COLOR);
-            activeIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_activeIndicatorStrokeColor, DEFAULT_ACTIVE_INDICATOR_STROKE_COLOR);
+            activeIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_activeIndicatorStrokeColor, activeIndicatorFillColor);
             activeIndicatorStrokeWidth = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_activeIndicatorStrokeWidth,
                     Math.round(DimensionHelper.pxFromDp(context, DEFAULT_ACTIVE_INDICATOR_STROKE_WIDTH_DP)));
 
             inactiveIndicatorSize = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_inactiveIndicatorFillSize,
                     Math.round(DimensionHelper.pxFromDp(context, DEFAULT_INACTIVE_INDICATOR_SIZE_DP)));
             inactiveIndicatorFillColor = a.getColor(R.styleable.PageIndicatorView_piv_inactiveIndicatorFillColor, DEFAULT_INACTIVE_INDICATOR_FILL_COLOR);
-            inactiveIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_inactiveIndicatorStrokeColor, DEFAULT_INACTIVE_INDICATOR_STROKE_COLOR);
+            inactiveIndicatorStrokeColor = a.getColor(R.styleable.PageIndicatorView_piv_inactiveIndicatorStrokeColor, inactiveIndicatorFillColor);
             inactiveIndicatorStrokeWidth = a.getDimensionPixelSize(R.styleable.PageIndicatorView_piv_inactiveIndicatorStrokeWidth,
                     Math.round(DimensionHelper.pxFromDp(context, DEFAULT_INACTIVE_INDICATOR_STROKE_WIDTH_DP)));
 
@@ -152,11 +151,12 @@ public class PageIndicatorView extends LinearLayout {
                 indicator = getInactiveIndicator();
             }
 
+            final PageIndicatorView pageIndicatorView = this;
             indicator.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (onIndicatorClickedListener != null) {
-                        onIndicatorClickedListener.onIndicatorClicked(currentIndex);
+                        onIndicatorClickedListener.onIndicatorClicked(pageIndicatorView, currentIndex);
                     }
                 }
             });
