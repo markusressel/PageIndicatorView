@@ -16,14 +16,12 @@
 
 package de.markusressel.android.library.pageindicatorview;
 
-import android.animation.ArgbEvaluator;
 import android.animation.FloatEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.pdf.PdfDocument;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.Log;
