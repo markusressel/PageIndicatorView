@@ -1,7 +1,7 @@
 # PageIndicatorView
 A small, simple, animated page indicator without the need for a viewpager.
 
-<div style='position:relative;padding-bottom:178%'><iframe src='https://gfycat.com/ifr/UnsightlyPointedAstarte' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+![Example](http://i.giphy.com/l3vRccyQXcHc1kDQs.gif)
 
 # Usage
 To use this view just include it in your depencencies using
