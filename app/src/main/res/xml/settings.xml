@@ -29,14 +29,14 @@
             android:title="@string/title_activeIndicatorStrokeColor"/>
 
         <EditTextPreference
-            android:defaultValue="15"
+            android:defaultValue="7"
             android:dialogTitle="@string/title_activeIndicatorFillSize"
             android:inputType="number"
             android:key="@string/key_activeIndicatorFillSize"
             android:title="@string/title_activeIndicatorFillSize"/>
 
         <EditTextPreference
-            android:defaultValue="1"
+            android:defaultValue="0"
             android:dialogTitle="@string/title_activeIndicatorStrokeWidth"
             android:inputType="number"
             android:key="@string/key_activeIndicatorStrokeWidth"
@@ -53,21 +53,21 @@
             android:title="@string/title_inactiveIndicatorStrokeColor"/>
 
         <EditTextPreference
-            android:defaultValue="10"
+            android:defaultValue="5"
             android:dialogTitle="@string/title_inactiveIndicatorFillSize"
             android:inputType="number"
             android:key="@string/key_inactiveIndicatorFillSize"
             android:title="@string/title_inactiveIndicatorFillSize"/>
 
         <EditTextPreference
-            android:defaultValue="1"
+            android:defaultValue="0"
             android:dialogTitle="@string/title_inactiveIndicatorStrokeWidth"
             android:inputType="number"
             android:key="@string/key_inactiveIndicatorStrokeWidth"
             android:title="@string/title_inactiveIndicatorStrokeWidth"/>
 
         <EditTextPreference
-            android:defaultValue="10"
+            android:defaultValue="5"
             android:dialogTitle="@string/title_indicatorGap"
             android:inputType="number"
             android:key="@string/key_indicatorGap"

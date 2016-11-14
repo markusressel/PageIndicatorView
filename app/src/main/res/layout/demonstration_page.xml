@@ -54,7 +54,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:piv_activeIndicatorFillColor="?attr/colorAccent"
         app:piv_activeIndicatorFillSize="10dp"
-        app:piv_inactiveIndicatorFillColor="#00ff00"
+        app:piv_inactiveIndicatorFillColor="?attr/colorPrimaryDark"
         app:piv_inactiveIndicatorFillSize="10dp"
         app:piv_initialPageIndex="0"
         app:piv_pageCount="5" />
@@ -82,7 +82,7 @@
 
     <!--
        Transparent center
-       The overall size keeps the same but the stroke grows inwards when active
+       The overall size stays the same but the stroke grows inwards when active
    -->
     <de.markusressel.android.library.pageindicatorview.PageIndicatorView
         android:id="@+id/pageIndicator4"
@@ -100,12 +100,43 @@
         app:piv_inactiveIndicatorStrokeWidth="5dp"
         app:piv_pageCount="5" />
 
+    <!--
+      colored center
+      The overall size stays the same but the inner circle grows when active
+    -->
     <de.markusressel.android.library.pageindicatorview.PageIndicatorView
         android:id="@+id/pageIndicator5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:paddingTop="@dimen/activity_vertical_margin"
+        app:piv_activeIndicatorFillColor="?attr/colorAccent"
+        app:piv_activeIndicatorFillSize="20dp"
+        app:piv_activeIndicatorStrokeColor="@android:color/white"
+        app:piv_activeIndicatorStrokeWidth="5dp"
+        app:piv_inactiveIndicatorFillColor="?attr/colorAccent"
+        app:piv_inactiveIndicatorFillSize="15dp"
+        app:piv_inactiveIndicatorStrokeColor="@android:color/darker_gray"
+        app:piv_inactiveIndicatorStrokeWidth="10dp"
+        app:piv_pageCount="5" />
+
+    <!--
+        The same example as 5, but with inverted color pattern
+    -->
+    <de.markusressel.android.library.pageindicatorview.PageIndicatorView
+        android:id="@+id/pageIndicator6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:piv_activeIndicatorFillColor="@android:color/white"
+        app:piv_activeIndicatorFillSize="20dp"
+        app:piv_activeIndicatorStrokeColor="?attr/colorAccent"
+        app:piv_activeIndicatorStrokeWidth="5dp"
+        app:piv_inactiveIndicatorFillColor="@android:color/darker_gray"
+        app:piv_inactiveIndicatorFillSize="15dp"
+        app:piv_inactiveIndicatorStrokeColor="?attr/colorPrimaryDark"
+        app:piv_inactiveIndicatorStrokeWidth="10dp"
         app:piv_pageCount="5" />
 
 </LinearLayout>

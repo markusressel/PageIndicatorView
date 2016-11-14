@@ -31,12 +31,12 @@
 
     <string name="key_activeIndicatorFillSize">activeIndicatorSize</string>
     <string name="title_activeIndicatorFillSize">Active indicator size</string>
-    <dimen name="default_value_activeIndicatorFillSize">10dp</dimen>
+    <dimen name="default_value_activeIndicatorFillSize">7dp</dimen>
     <string name="summary_activeIndicatorSize">%1$sdp</string>
 
     <string name="key_activeIndicatorStrokeWidth">activeIndicatorStrokeWidth</string>
     <string name="title_activeIndicatorStrokeWidth">Active indicator stroke width</string>
-    <dimen name="default_value_activeIndicatorStrokeWidth">1dp</dimen>
+    <dimen name="default_value_activeIndicatorStrokeWidth">0dp</dimen>
     <string name="summary_activeIndicatorStrokeWidth">%1$sdp</string>
 
 
@@ -51,17 +51,17 @@
 
     <string name="key_inactiveIndicatorFillSize">inactiveIndicatorSize</string>
     <string name="title_inactiveIndicatorFillSize">Inactive indicator size</string>
-    <dimen name="default_value_inactiveIndicatorFillSize">15dp</dimen>
+    <dimen name="default_value_inactiveIndicatorFillSize">5dp</dimen>
     <string name="summary_inactiveIndicatorSize">%1$sdp</string>
 
     <string name="key_inactiveIndicatorStrokeWidth">inactiveIndicatorStrokeWidth</string>
     <string name="title_inactiveIndicatorStrokeWidth">Inactive indicator stroke width</string>
-    <dimen name="default_value_inactiveIndicatorStrokeWidth">1dp</dimen>
+    <dimen name="default_value_inactiveIndicatorStrokeWidth">0dp</dimen>
     <string name="summary_inactiveIndicatorStrokeWidth">%1$sdp</string>
 
     <string name="key_indicatorGap">indicatorGap</string>
     <string name="title_indicatorGap">Gap between indicators</string>
-    <dimen name="default_value_indicatorGap">10dp</dimen>
+    <dimen name="default_value_indicatorGap">5dp</dimen>
     <string name="summary_indicatorGap">%1$sdp</string>
 
     <string name="key_initialPageIndex">initialPageIndex</string>

@@ -529,7 +529,7 @@ public class PageIndicatorView extends LinearLayout {
      * @param width width in pixel
      */
     public void setActiveIndicatorStrokeWidth(float width) {
-        this.activeIndicatorStrokeWidth = width - 1;
+        this.activeIndicatorStrokeWidth = width;
 
         for (int i = 0; i < pageCount; i++) {
             if (i == currentPage) {
@@ -551,7 +551,7 @@ public class PageIndicatorView extends LinearLayout {
      * @param width width in pixel
      */
     public void setInactiveIndicatorStrokeWidth(float width) {
-        this.inactiveIndicatorStrokeWidth = width - 1;
+        this.inactiveIndicatorStrokeWidth = width;
 
         for (int i = 0; i < pageCount; i++) {
             if (i != currentPage) {

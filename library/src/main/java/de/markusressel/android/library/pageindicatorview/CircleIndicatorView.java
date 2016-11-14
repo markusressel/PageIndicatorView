@@ -22,7 +22,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -31,6 +33,8 @@ import android.view.View;
  * Created by Markus on 13.07.2016.
  */
 class CircleIndicatorView extends View {
+
+    private static final String TAG = "CircleIndicatorView";
 
     private static final int DEFAULT_DIAMETER = 10;
     private static final int DEFAULT_FILL_COLOR = Color.WHITE;
@@ -176,6 +180,7 @@ class CircleIndicatorView extends View {
      *
      * @return fill color
      */
+    @ColorInt
     public int getFillColor() {
         return fillColor;
     }
@@ -185,7 +190,7 @@ class CircleIndicatorView extends View {
      *
      * @param fillColor color
      */
-    public void setFillColor(int fillColor) {
+    public void setFillColor(@ColorInt int fillColor) {
         this.fillColor = fillColor;
         indicatorFillPaint.setColor(fillColor);
 
@@ -198,6 +203,7 @@ class CircleIndicatorView extends View {
      *
      * @return stroke color
      */
+    @ColorInt
     public int getStrokeColor() {
         return strokeColor;
     }
@@ -207,7 +213,7 @@ class CircleIndicatorView extends View {
      *
      * @param strokeColor color
      */
-    public void setStrokeColor(int strokeColor) {
+    public void setStrokeColor(@ColorInt int strokeColor) {
         this.strokeColor = strokeColor;
         indicatorStrokePaint.setColor(strokeColor);
 
@@ -226,10 +232,16 @@ class CircleIndicatorView extends View {
 
     /**
      * Set the stroke width in pixel
+     * <p>
+     * {@inheritDoc }
      *
      * @param strokeWidth stroke width in pixel
      */
     public void setStrokeWidth(float strokeWidth) {
+        if (strokeWidth < 0) {
+            Log.w(TAG, "invalid range, param has to be >= 0 but was " + strokeWidth);
+        }
+
         this.strokeWidth = strokeWidth;
         indicatorStrokePaint.setStrokeWidth(strokeWidth);
 

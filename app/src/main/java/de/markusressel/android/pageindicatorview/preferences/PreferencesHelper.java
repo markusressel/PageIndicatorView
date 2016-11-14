@@ -25,15 +25,24 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 /**
+ * Simply Preferences helper for easy access to colors, integers and dimensions stored in SharedPreferences
+ * <p>
  * Created by Markus on 11.11.2016.
  */
-
-public class PreferencesHelper {
+public final class PreferencesHelper {
 
     public static final String SHARED_PREFS_NAME = "settings";
 
+    private PreferencesHelper() {
+    }
+
+    private static float dpFromPx(final Context context, final float px) {
+        return px / context.getResources().getDisplayMetrics().density;
+    }
+
     /**
      * Get a dimension from preferences
+     * This returns the dp value, not the actual pixel value!
      *
      * @param context      application context
      * @param key          preference key
@@ -45,7 +54,7 @@ public class PreferencesHelper {
         String dimenAsString = sharedPreferences.getString(context.getString(key), null);
 
         if (dimenAsString == null) {
-            return context.getResources().getDimension(defaultValue);
+            return dpFromPx(context, context.getResources().getDimension(defaultValue));
         } else {
             return Float.valueOf(dimenAsString);
         }

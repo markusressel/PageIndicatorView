@@ -148,14 +148,14 @@ public class MainActivity extends AppCompatActivity {
         int initialPageIndex = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex);
         int pageCount = PreferencesHelper.getInteger(getApplicationContext(), R.string.key_pageCount, R.integer.default_value_pageCount);
 
+        pageIndicatorView.setActiveIndicatorSize(Math.round(pxFromDp(this, activeIndicatorSize)));
         pageIndicatorView.setActiveIndicatorFillColor(activeIndicatorColorFill);
         pageIndicatorView.setActiveIndicatorStrokeColor(activeIndicatorColorStroke);
-        pageIndicatorView.setActiveIndicatorSize(Math.round(pxFromDp(this, activeIndicatorSize)));
         pageIndicatorView.setActiveIndicatorStrokeWidth(Math.round(pxFromDp(this, activeIndicatorStrokeWidth)));
 
+        pageIndicatorView.setInactiveIndicatorSize(Math.round(pxFromDp(this, inactiveIndicatorSize)));
         pageIndicatorView.setInactiveIndicatorFillColor(inactiveIndicatorColorFill);
         pageIndicatorView.setInactiveIndicatorStrokeColor(inactiveIndicatorColorStroke);
-        pageIndicatorView.setInactiveIndicatorSize(Math.round(pxFromDp(this, inactiveIndicatorSize)));
         pageIndicatorView.setInactiveIndicatorStrokeWidth(Math.round(pxFromDp(this, inactiveIndicatorStrokeWidth)));
 
         pageIndicatorView.setIndicatorGap(Math.round(pxFromDp(this, indicatorGap)));

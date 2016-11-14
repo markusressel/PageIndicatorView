@@ -60,12 +60,14 @@ public class DemonstrationPage extends Fragment {
         PageIndicatorView pageIndicator3 = (PageIndicatorView) rootView.findViewById(R.id.pageIndicator3);
         PageIndicatorView pageIndicator4 = (PageIndicatorView) rootView.findViewById(R.id.pageIndicator4);
         PageIndicatorView pageIndicator5 = (PageIndicatorView) rootView.findViewById(R.id.pageIndicator5);
+        PageIndicatorView pageIndicator6 = (PageIndicatorView) rootView.findViewById(R.id.pageIndicator6);
 
         pageIndicators.add(pageIndicator1);
         pageIndicators.add(pageIndicator2);
         pageIndicators.add(pageIndicator3);
         pageIndicators.add(pageIndicator4);
         pageIndicators.add(pageIndicator5);
+        pageIndicators.add(pageIndicator6);
 
         for (PageIndicatorView pageIndicator : pageIndicators) {
             pageIndicator.setOnIndicatorClickedListener(onIndicatorClickedListener);
