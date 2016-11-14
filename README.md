@@ -63,6 +63,19 @@ You can also set these values in code using the following methods:
     pageIndicatorView.setCurrentPage(initialPageIndex, false);  // not animated
     pageIndicatorView.setCurrentPage(initialPageIndex, true);   // animated
 
+To be able to react to "OnClick" events on indicators, you can set a OnIndicatorClickedListener like this:
+
+    pageIndicatorView.setOnIndicatorClickedListener(new OnIndicatorClickedListener() {
+        @Override
+        public void onIndicatorClicked(PageIndicatorView pageIndicatorView, int index) {
+                // set the indicator view to the clicked position
+                pageIndicatorView.setCurrentPage(index, true);
+
+                // set your view pager to the clicked position
+                tabViewPager.setCurrentItem(index);
+            }
+        });
+
 # License
 
     Copyright (c) 2016 Markus Ressel
