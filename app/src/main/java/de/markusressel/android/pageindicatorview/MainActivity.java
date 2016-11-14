@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (SettingsPage.INTENT_ACTION_PREFRENCE_CHANGED.equals(intent.getAction())) {
+                if (SettingsPage.INTENT_ACTION_PREFERENCE_CHANGED.equals(intent.getAction())) {
                     String key = intent.getStringExtra(SettingsPage.KEY_PREFERENCE_KEY);
 
                     if (getString(R.string.key_activeIndicatorFillColor).equals(key)) {
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(SettingsPage.INTENT_ACTION_PREFRENCE_CHANGED);
+        intentFilter.addAction(SettingsPage.INTENT_ACTION_PREFERENCE_CHANGED);
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(broadcastReceiver, intentFilter);
     }
 

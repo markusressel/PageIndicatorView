@@ -36,7 +36,7 @@ import de.markusressel.android.pageindicatorview.preferences.PreferencesHelper;
  */
 public class SettingsPage extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public static final String INTENT_ACTION_PREFRENCE_CHANGED = "preference_changed";
+    public static final String INTENT_ACTION_PREFERENCE_CHANGED = "preference_changed";
     public static final String KEY_PREFERENCE_KEY = "preferenceKey";
     private EditTextPreference activeIndicatorSize;
     private EditTextPreference inactiveIndicatorSize;
@@ -64,7 +64,7 @@ public class SettingsPage extends PreferenceFragment implements SharedPreference
      * @param key     prefrence key that has changed
      */
     private static void notifyPreferenceChanged(Context context, String key) {
-        Intent intent = new Intent(INTENT_ACTION_PREFRENCE_CHANGED);
+        Intent intent = new Intent(INTENT_ACTION_PREFERENCE_CHANGED);
         intent.putExtra(KEY_PREFERENCE_KEY, key);
 
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
