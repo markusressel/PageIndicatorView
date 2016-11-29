@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2016 Markus Ressel
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+	<string name="define_pageindicatorview"></string>
+	<!-- Author section -->
+	<string name="library_pageindicatorview_author">Markus Ressel</string>
+	<string name="library_pageindicatorview_authorWebsite">http://markusressel.de</string>
+	<!-- Library section -->
+	<string name="library_pageindicatorview_libraryName">PageIndicatorView</string>
+	<string name="library_pageindicatorview_libraryDescription">A small, simple, animated page indicator without the need for a ViewPager</string>
+	<string name="library_pageindicatorview_libraryWebsite">https://github.com/markusressel/PageIndicatorView</string>
+	<string name="library_pageindicatorview_libraryVersion">0.9.5</string>
+	<!-- OpenSource section -->
+	<string name="library_pageindicatorview_isOpenSource">true</string>
+	<string name="library_pageindicatorview_repositoryLink">https://github.com/markusressel/PageIndicatorView</string>
+	<!-- ClassPath for autoDetect section -->
+	<string name="library_pageindicatorview_classPath">de.markusressel.android.library.pageindicatorview</string>
+	<!-- License section -->
+	<string name="library_pageindicatorview_licenseId">apache_2_0</string>
+	<!-- Custom variables section -->
+</resources>
