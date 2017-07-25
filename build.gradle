@@ -19,9 +19,13 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
+
+        // for jitpack builds
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -31,9 +35,24 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    minSdkVersion = 14
+    versionName = "0.9.7"
+
+    compileSdkVersion = 26
+    targetSdkVersion = 26
+    buildToolsVersion = "26.0.0"
+
+    supportLibVersion = "25.4.0"
+    dagger2Version = "2.11"
+    butterknifeVersion = "8.6.0"
+    lombokVersion = "1.16.16"
 }
