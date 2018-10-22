@@ -39,12 +39,12 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-v13:${rootProject.ext.supportLibVersion}"
-    compile "com.android.support:preference-v14:${rootProject.ext.supportLibVersion}"
-    compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:support-v13:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:preference-v14:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
 
-    compile project(':library')
+    implementation project(':library')
 
     // external libraries
-    compile 'com.rarepebble:colorpicker:2.0.0'
+    implementation 'com.rarepebble:colorpicker:2.0.0'
 }

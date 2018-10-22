@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
 }
 
 // build a jar with source files

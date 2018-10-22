@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        pageIndicatorView = (PageIndicatorView) findViewById(R.id.pageIndicator);
+        pageIndicatorView = findViewById(R.id.pageIndicator);
         pageIndicatorView.setOnIndicatorClickedListener(new OnIndicatorClickedListener() {
             @Override
             public void onIndicatorClicked(PageIndicatorView pageIndicatorView, int index) {
@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Create the adapter that will return a fragment
         // for each of the two primary sections of the app.
-        customTabAdapter = new CustomTabAdapter(getFragmentManager(), this);
+        customTabAdapter = new CustomTabAdapter(getFragmentManager());
 
         // Set up the tabViewPager, attaching the adapter and setting up a listener
         // for when the user swipes between sections.
-        tabViewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabViewPager = findViewById(R.id.viewPager);
         tabViewPager.setAdapter(customTabAdapter);
 
         tabViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -179,12 +179,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class CustomTabAdapter extends FragmentPagerAdapter {
-        private Context context;
         private int count = 5;
 
-        public CustomTabAdapter(FragmentManager fm, Context context) {
+        public CustomTabAdapter(FragmentManager fm) {
             super(fm);
-            this.context = context;
         }
 
         @Override
