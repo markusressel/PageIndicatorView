@@ -14,7 +14,7 @@ To use this view just include it in your depencencies using
 in your project build.gradle file and
 
     dependencies {
-        compile 'com.github.markusressel:PageIndicatorView:v0.9.7'
+        compile 'com.github.markusressel:PageIndicatorView:v0.9.8'
     }
     
 in your desired module build.gradle file.
