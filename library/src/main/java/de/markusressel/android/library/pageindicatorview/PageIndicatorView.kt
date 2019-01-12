@@ -376,9 +376,14 @@ class PageIndicatorView : LinearLayout {
      * @param index    Index of current page
      * @param animated index change will be animated if set to true
      */
-    fun setCurrentPage(index: Int, animated: Boolean) {
+    fun setCurrentPage(index: Int, animated: Boolean = true) {
         if (index >= pageCount || index < 0) {
             Log.w(TAG, "Invalid index! PageCount: $pageCount, requested index: $index")
+            return
+        }
+
+        if (index == currentPage) {
+            Log.d(TAG, "Current page is already at index $index.")
             return
         }
 

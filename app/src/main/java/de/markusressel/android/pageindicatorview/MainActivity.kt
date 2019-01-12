@@ -55,7 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         pageIndicator.setOnIndicatorClickedListener(object : OnIndicatorClickedListener {
             override fun onIndicatorClicked(pageIndicatorView: PageIndicatorView, index: Int) {
+                // set the indicator view to the clicked position
                 pageIndicatorView.setCurrentPage(index, true)
+
+                // set your view pager to the clicked position
                 viewPager.currentItem = index
             }
         })
@@ -149,7 +152,7 @@ class MainActivity : AppCompatActivity() {
         val initialPageIndex = PreferencesHelper.getInteger(applicationContext, R.string.key_initialPageIndex, R.integer.default_value_initialPageIndex)
         val pageCount = PreferencesHelper.getInteger(applicationContext, R.string.key_pageCount, R.integer.default_value_pageCount)
 
-        pageIndicator.setActiveIndicatorSize(Math.round(pxFromDp(this, activeIndicatorSize)))
+        pageIndicator.activeIndicatorSize = pxFromDp(this, activeIndicatorSize)
         pageIndicator.activeIndicatorFillColor = activeIndicatorColorFill
         pageIndicator.activeIndicatorStrokeColor = activeIndicatorColorStroke
         pageIndicator.activeIndicatorStrokeWidth = pxFromDp(this, activeIndicatorStrokeWidth)
