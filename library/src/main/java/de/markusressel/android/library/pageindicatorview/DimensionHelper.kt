@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package de.markusressel.android.library.pageindicatorview;
+package de.markusressel.android.library.pageindicatorview
+
+import android.content.Context
 
 /**
- * Listener for indicator click events
- * <p>
+ * Simple helper methods for UI calculations
+ *
+ *
  * Created by Markus on 14.11.2016.
  */
-public interface OnIndicatorClickedListener {
+internal object DimensionHelper {
 
-    /**
-     * Called when an indicator is clicked
-     *
-     * @param pageIndicatorView the PageIndicatorView that holds this indicator
-     * @param index             position of this indicator
-     */
-    void onIndicatorClicked(PageIndicatorView pageIndicatorView, int index);
+    fun pxFromDp(context: Context, dp: Float): Float {
+        return dp * context.resources.displayMetrics.density
+    }
 
 }

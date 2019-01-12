@@ -15,7 +15,9 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka-android'
 
 group = 'com.github.markusressel'
 
@@ -45,6 +47,8 @@ android {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
 }
 
@@ -67,7 +71,12 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
+task dokkaJar(type: Jar, dependsOn: dokka) {
+    classifier = 'javadoc'
+    from dokka.outputDirectory
+}
+
 artifacts {
     archives sourcesJar
-    archives javadocJar
+    archives dokkaJar
 }
