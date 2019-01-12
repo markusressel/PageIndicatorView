@@ -25,7 +25,7 @@
 	<string name="library_pageindicatorview_libraryName">PageIndicatorView</string>
 	<string name="library_pageindicatorview_libraryDescription">A small, simple, animated page indicator without the need for a ViewPager</string>
 	<string name="library_pageindicatorview_libraryWebsite">@string/library_pageindicatorview_repositoryLink</string>
-    <string name="library_pageindicatorview_libraryVersion">0.9.8</string>
+    <string name="library_pageindicatorview_libraryVersion">1.0.0</string>
 	<!-- OpenSource section -->
 	<string name="library_pageindicatorview_isOpenSource">true</string>
 	<string name="library_pageindicatorview_repositoryLink">https://github.com/markusressel/PageIndicatorView</string>
