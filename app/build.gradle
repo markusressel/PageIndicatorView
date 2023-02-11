@@ -52,5 +52,5 @@ dependencies {
     implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
 
     // external libraries
-    implementation 'com.rarepebble:colorpicker:2.0.0'
+    implementation 'com.rarepebble:colorpicker:3.0.1'
 }
